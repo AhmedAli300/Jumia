@@ -1,3 +1,4 @@
+import ProductDetails from "./Comoonents/Product details/ProductDetails"
 
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
 
   return (
     <>
-      
+      <ProductDetails />
     </>
   )
 }
