@@ -23,7 +23,7 @@ const ProductDetails = () => {
 
             <div className="pe-2 col-sm-12 col-md-8">
               <h5>
-                Karimed وينك برو كريم لطفح الحفاضات للأطفال 30جم <i className="fa-regular fa-heart pe-5 text-warning"></i>
+                Karimed وينك برو كريم لطفح الحفاضات للأطفال 30جم <i className="fa-regular fa-heart me-5 text-warning"></i>
               </h5>
               <p>
                 الماركة : <a href="#" className="link-underline link-underline-opacity-0">kraimed</a> |
