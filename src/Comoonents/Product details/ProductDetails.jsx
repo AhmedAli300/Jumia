@@ -4,6 +4,7 @@ import '../../App.css'
 const ProductDetails = () => {
   return (
     <>
+    {/* hislnfilenlfnel */}
          <main className="row g-0 d-flex justify-content-center bg-gray">
       <section className="col-12 col-sm-7 mt-5 ms-3">
         <div className="bg-body-tertiary rounded">
