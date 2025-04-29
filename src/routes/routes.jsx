@@ -10,7 +10,7 @@ import About from '../screens/About/About'
 import Cart from '../screens/Cart/CartItem';
 import EmptyCart from '../screens/Cart/emptyCart';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import ProductDetails from '../Comoonents/Product details/ProductDetails';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'details/:id',
-        element: <Details />,
+        element: <ProductDetails />,
         errorElement: <NotFound />
       },
       {
