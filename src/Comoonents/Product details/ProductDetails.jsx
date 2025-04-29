@@ -4,7 +4,7 @@ import '../../App.css'
 const ProductDetails = () => {
   return (
     <>
-      {/* dbakbcksbk */}
+
       <main className="row g-0 d-flex justify-content-center bg-gray">origin
         <section className="col-12 col-sm-7 mt-5 ms-3">
           <div className="bg-body-tertiary rounded">
