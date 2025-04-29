@@ -1,12 +1,22 @@
 import ProductDetails from "./Comoonents/Product details/ProductDetails"
 
+import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
+import store from './store/store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+import router from './routes/routes';
 function App() {
-  
+
 
   return (
     <>
-      <ProductDetails />
+      <div>
+        <Provider store={store}>
+
+          <RouterProvider router={router} />
+        </Provider>
+      </div>
     </>
   )
 }
