@@ -1,4 +1,4 @@
-import ProductDetails from "./Comoonents/Product details/ProductDetails"
+// import ProductDetails from "./Comoonents/Product details/ProductDetails"
 
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
@@ -13,7 +13,6 @@ function App() {
     <>
       <div>
         <Provider store={store}>
-
           <RouterProvider router={router} />
         </Provider>
       </div>
