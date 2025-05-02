@@ -1,10 +1,55 @@
-/* body{
-    font-family: "AdineuePRO", Helvetica, Arial, sans-serif;
-} */
+.login-container {
+    max-width: 530px;
+    margin: auto;
+    padding: 40px;
+    text-align: center;
+  }
 
-.ptpn{
-    padding: 10px 13px;
-    border: 1px solid #000 ; 
-    background-color: #000;
-    color: #FFFFFF;
-}
+  .login-box {
+    background: #fff;
+  }
+
+  .login-box input {
+    border: 1px solid #ccc;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #333;
+  }
+
+  .Jumia {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .btnn {
+    background-color: #f8982d;
+    color: white;
+    font-size: 18px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+
+  .btnn:hover {
+    background-color: #f8982d; 
+    color: white;
+  }
+
+  .btn-facebook {
+    background-color: #1877f2;
+    color: white;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .btn-facebook:hover {
+    background-color: #1877f2;
+    color: white;
+  }
+
+  .foo0ter {
+    font-size: 14px;
+    margin-top: 20px;
+    color: #333;
+  }
