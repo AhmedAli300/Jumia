@@ -1,7 +1,21 @@
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+
 const Navbar = () => {
+    const [isSticky, setIsSticky] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsSticky(window.scrollY > 100);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const navigate = useNavigate();
+
     return (
         <div>
             <div className="container-fluid main">
@@ -29,7 +43,7 @@ const Navbar = () => {
                             <p className="fpara" style={{ opacity: 0.3 }}>
                                 <img src="/imgs1 (1).svg" alt="enlang" width="20px" height="20px" /> English
                             </p>
-                            <p >
+                            <p>
                                 <img src="/imgs1 (2).svg" alt="enlang" width="20px" height="20px" /> عربي
                             </p>
                         </div>
@@ -37,7 +51,20 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <nav className="header navbar navbar-expand-lg navbar-light" style={{ paddingRight: '120px' }}>
+            {isSticky && <div style={{ height: '90px' }}></div>}
+
+            <nav
+                className={`header navbar navbar-expand-lg navbar-light ${isSticky ? 'shadow-sm bg-white' : ''}`}
+                style={{
+                    paddingRight: '120px',
+                    position: isSticky ? 'fixed' : 'static',
+                    top: isSticky ? 0 : 'auto',
+                    zIndex: 1000,
+                    left: 0,
+                    right: 0,
+                    transition: 'all 0.3s ease-in-out',
+                }}
+            >
                 <div className="container">
                     <div className="responsve" style={{ marginLeft: '80px' }}>
                         <span className="text-dark fs-4">☰</span>
@@ -50,7 +77,7 @@ const Navbar = () => {
                     </div>
 
                     <form className="d-flex search-bar mx-auto align-items-center" style={{ width: '100%', maxWidth: '550px' }}>
-                        <i className="bi bi-search search-icon ssicon" ></i>
+                        <i className="bi bi-search search-icon ssicon"></i>
                         <input
                             className="form-control px-5"
                             type="search"
@@ -78,7 +105,7 @@ const Navbar = () => {
                             <div className="dropdown mx-2 hov">
                                 <a
                                     href="#"
-                                    className="text-dark dropicon text-decoration-none hov "
+                                    className="text-dark dropicon text-decoration-none hov"
                                     id="loginDropdown"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
@@ -88,29 +115,15 @@ const Navbar = () => {
                                     <i className="bi bi-chevron-down btn-log" style={{ fontSize: '11px', marginRight: '5px', fontWeight: 'bold' }}></i>
                                 </a>
                                 <ul className="dropdown-menu custom-dropdown text-end" aria-labelledby="loginDropdown">
-                                    <li >
-                                        <a className="dropdown-item " >
+                                    <li>
+                                        <a className="dropdown-item">
                                             <button className="chat-button" onClick={() => navigate('/login')}> تسجيل الدخول </button>
                                         </a>
                                     </li>
-                                    <li>
-                                        <hr className="dropdown-divider" />
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" >
-                                            <i className="bi bi-person fs-5 mx-1"></i> الحساب
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" >
-                                            <i className="bi bi-cassette-fill mx-1"></i> الطلبات
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item">
-                                            <i className="bi bi-heart mx-1"></i> المنتجات المحفوظة
-                                        </a>
-                                    </li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><a className="dropdown-item"><i className="bi bi-person fs-5 mx-1"></i> الحساب</a></li>
+                                    <li><a className="dropdown-item"><i className="bi bi-cassette-fill mx-1"></i> الطلبات</a></li>
+                                    <li><a className="dropdown-item"><i className="bi bi-heart mx-1"></i> المنتجات المحفوظة</a></li>
                                 </ul>
                             </div>
 
@@ -123,38 +136,15 @@ const Navbar = () => {
                                     aria-expanded="false"
                                 >
                                     <i className="bi bi-question-circle fs-5 mx-1"></i> المساعدة
-
                                     <i className="bi bi-chevron-down" style={{ fontSize: '11px', marginRight: '5px', fontWeight: 'bold' }}></i>
                                 </a>
                                 <ul className="dropdown-menu custom-dropdown text-end">
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            مركز المساعدة
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            المساعدة في طلبي
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            إلغاء طلبك
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            الإرجاع والاسترداد
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            طرق الدفع
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <hr className="dropdown-divider" />
-                                    </li>
+                                    <li><a className="dropdown-item" href="#">مركز المساعدة</a></li>
+                                    <li><a className="dropdown-item" href="#">المساعدة في طلبي</a></li>
+                                    <li><a className="dropdown-item" href="#">إلغاء طلبك</a></li>
+                                    <li><a className="dropdown-item" href="#">الإرجاع والاسترداد</a></li>
+                                    <li><a className="dropdown-item" href="#">طرق الدفع</a></li>
+                                    <li><hr className="dropdown-divider" /></li>
                                     <li>
                                         <button className="chat-button">
                                             <i className="bi bi-chat-left-dots-fill mx-2"></i> تحدث معنا
@@ -166,7 +156,6 @@ const Navbar = () => {
                             <a className="text-dark text-decoration-none hov" onClick={() => navigate('/cart')}>
                                 <i className="bi bi-cart fs-5 mx-1"></i>
                                 <span className="btn-log">سلة التسوق </span>
-
                             </a>
                         </div>
                     </div>
@@ -175,6 +164,5 @@ const Navbar = () => {
         </div>
     );
 };
-
 
 export default Navbar;
