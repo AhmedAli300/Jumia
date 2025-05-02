@@ -3,13 +3,18 @@
     margin: auto;
     padding: 40px;
     text-align: center;
-  }
+    background: #fff;
 
-  .login-box {
+  }
+body{
+  background: white;
+
+}
+  .log-box {
     background: #fff;
   }
 
-  .login-box input {
+  .log-box input {
     border: 1px solid #ccc;
     padding-top: 15px;
     padding-bottom: 15px;
