@@ -17,9 +17,11 @@ const Products = () => {
   
   return (
     <>
+    {/* <h1>havcjhajh</h1> */}
+    {console.log(products.data)}
     
     {console.log(products.data?.[0].images[0])}
-    
+    <img src={products.data?.[0].images[0]} alt="ascsa" />
     </>
   );
 };
