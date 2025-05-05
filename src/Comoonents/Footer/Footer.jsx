@@ -68,7 +68,7 @@ const Footer = () => {
                 <form action="" method="post" className="py-2 d-flex align-items-center">
                   <input type="text" placeholder="ادخل بريدك الالكتروني" />
                   <i className="fa-regular fa-envelope"></i>
-                  <button className="gander" value="male">زكر</button>
+                  <button className="gander" value="male">ذكر</button>
                   <button className="gander" value="female">انثي</button>
                 </form>
                 <div className="d-flex gap-2 my-2 align-items-start">
