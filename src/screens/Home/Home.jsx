@@ -1,3 +1,4 @@
+import Products from "../Products/Product"
 import "./Home.css"
 
 
@@ -1005,7 +1006,7 @@ const Home = () => {
         />
       </div>
 
-
+{/* 
       <div className="container">
         <div className="text-center bg-danger p-3 w-100 m-auto rounded-2">
           <img className="w-100 rounded-2" src="./1200x200ar.png" alt="" />
@@ -1188,8 +1189,6 @@ const Home = () => {
 
       </div>
 
-
-
       <div className="container">
         <h5 className="bg-warning p-3 text-center">عروض رائعة على الأجهزة الكهربائية</h5>
         <div className="row">
@@ -1204,7 +1203,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
 
       <div className="container">
         <a className="text-decoration-none text-dark" href="/product details/productDetails.html">
@@ -1293,7 +1291,6 @@ const Home = () => {
 
       </div>
 
-
       <div className="container">
         <h5 className="bg-bauty p-3 text-center"> منتجات الجمال باسعار تناسبك</h5>
         <div className="row">
@@ -1317,7 +1314,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
 
       <div className="container">
         <div className="row bg-white my-5">
@@ -1403,9 +1399,6 @@ const Home = () => {
         </div>
       </div>
 
-
-
-
       <div className="container">
 
         <h5 className="bg-cold p-3 text-center w-100">تخفيضات أزياء الشتاء</h5>
@@ -1433,11 +1426,6 @@ const Home = () => {
         </a>
 
       </div>
-
-
-
-
-
 
       <div className="container">
         <a className="text-decoration-none text-dark" href="/product details/productDetails.html">
@@ -1527,11 +1515,6 @@ const Home = () => {
         </a>
 
       </div>
-
-
-
-
-
       <div className="container">
         <h5 className="bg-cold p-3 text-center">✪ منتجات تريند ✪</h5>
         <div className="row  ">
@@ -1555,11 +1538,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-
-
-
-
       <div className="container">
 
         <div className="row bg-white my-5">
@@ -1674,13 +1652,6 @@ const Home = () => {
 
         </div>
       </div>
-
-
-
-
-
-
-
       <div className="container">
 
         <div className="row bg-white my-2">
@@ -1737,9 +1708,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-
-
       <div className="container">
         <a className="text-decoration-none text-dark" href="/product details/productDetails.html">
           <div className="row bg-white my-5">
@@ -1829,7 +1797,6 @@ const Home = () => {
         </a>
 
       </div>
-
       <div className="container margn mt-4 ">
         <div className="row ">
           <div className="col-md-12 bagrond">
@@ -1896,10 +1863,8 @@ const Home = () => {
 
           </div>
         </div>
-      </div>
-
-
-
+      </div> */}
+      <Products/>
     </>
 
   )
