@@ -9,7 +9,6 @@ const Home = () => {
 
   const handleCategorhOVER = () => {
     setIsVisible(true);
-    console.log(categories.find((cat) => cat.title == "أزياء").subcategories);
 
     setData(categories.find((cat) => cat.title == "أزياء").subcategories);
   };
@@ -1798,7 +1797,7 @@ const Home = () => {
         />
       </div>
 
-<Products/>
+<Products />
       {/* <div className="container">
         <div className="text-center bg-danger p-3 w-100 m-auto rounded-2">
           <img className="w-100 rounded-2" src="./1200x200ar.png" alt="" />
