@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Overlay from "../../Comoonents/Overlay/Overlay";
 import "./Home.css";
 import { categories } from "./categpries";
+import Products from "../Products/Product";
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState({});
@@ -1797,11 +1798,14 @@ const Home = () => {
         />
       </div>
 
-      <div className="container">
+<Products/>
+      {/* <div className="container">
         <div className="text-center bg-danger p-3 w-100 m-auto rounded-2">
           <img className="w-100 rounded-2" src="./1200x200ar.png" alt="" />
         </div>
-      </div>
+      </div> */}
+     
+{/*      
       <div className="container">
         <a
           className="text-decoration-none text-dark"
@@ -3008,7 +3012,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
