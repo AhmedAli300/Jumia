@@ -11,6 +11,11 @@ import Cart from '../screens/Cart/CartItem';
 import EmptyCart from '../screens/Cart/emptyCart';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetails from '../Comoonents/Product details/ProductDetails';
+import Login2 from '../screens/Login/Login2';
+import Login3 from '../screens/Login/Login3';
+import Login4 from '../screens/Login/Login4';
+import Login5 from '../screens/Login/Login5';
+import Login6 from '../screens/Login/Login6';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -48,10 +53,6 @@ const router = createBrowserRouter([
         errorElement: <NotFound />
       },
 
-      {
-        path: 'login',
-        element: <Login />
-      }
       // {
       //   path: 'favourte',
       //   element: ,
@@ -64,6 +65,30 @@ const router = createBrowserRouter([
     ]
   },
 
+  {
+    path: 'login',
+    element: <Login />
+  },
+  {
+  path:'login2',
+  element:<Login2/>
+  },
+  {
+    path:"login3",
+    element:<Login3/>
+  },
+  {
+    path: 'login4',
+    element: <Login4 />
+  },
+  {
+   path:"login5",
+    element:<Login5/>
+  },
+  {
+   path:'login6',
+    element:<Login6/>
+  },
 
   {
     path: 'Wishlist',

@@ -1,7 +1,8 @@
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/Slice/authSlice'
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false);
 
@@ -14,8 +15,10 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    
     return (
         <div>
             <div className="container-fluid main">
@@ -102,30 +105,96 @@ const Navbar = () => {
 
                     <div style={{ paddingLeft: '120px' }}>
                         <div className="d-flex align-items-center">
-                            <div className="dropdown mx-2 hov">
-                                <a
-                                    href="#"
-                                    className="text-dark dropicon text-decoration-none hov"
-                                    id="loginDropdown"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <i className="bi bi-person fs-5 mx-1 lefticon"></i>
-                                    <span className="btn-log">تسجيل الدخول</span>
-                                    <i className="bi bi-chevron-down btn-log" style={{ fontSize: '11px', marginRight: '5px', fontWeight: 'bold' }}></i>
-                                </a>
-                                <ul className="dropdown-menu custom-dropdown text-end" aria-labelledby="loginDropdown">
-                                    <li>
-                                        <a className="dropdown-item">
-                                            <button className="chat-button" onClick={() => navigate('/login')}> تسجيل الدخول </button>
-                                        </a>
-                                    </li>
-                                    <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item"><i className="bi bi-person fs-5 mx-1"></i> الحساب</a></li>
-                                    <li><a className="dropdown-item"><i className="bi bi-cassette-fill mx-1"></i> الطلبات</a></li>
-                                    <li><a className="dropdown-item"><i className="bi bi-heart mx-1"></i> المنتجات المحفوظة</a></li>
-                                </ul>
-                            </div>
+                           
+
+<div className="dropdown mx-2 hov">
+  <a
+    href="#"
+    className="text-dark dropicon text-decoration-none hov"
+    id="loginDropdown"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <i className="bi bi-person fs-5 mx-1 lefticon"></i>
+    <span className="btn-log">
+      {user ? `مرحبًا، ${user.name}` : 'تسجيل الدخول'}
+    </span>
+    <i
+      className="bi bi-chevron-down btn-log"
+      style={{ fontSize: '11px', marginRight: '5px', fontWeight: 'bold' }}
+    ></i>
+  </a>
+
+  <ul className="dropdown-menu custom-dropdown text-end" aria-labelledby="loginDropdown">
+    {!user ? (
+      <>
+        <li>
+          <a className="dropdown-item">
+            <button className="chat-button" onClick={() => navigate('/login')}>
+              تسجيل الدخول
+            </button>
+          </a>
+        </li>
+        <li>
+          <a className="dropdown-item">
+            <i className="bi bi-person fs-5 mx-1"></i> الحساب
+          </a>
+          </li>
+          <li>
+          <a className="dropdown-item">
+            <i className="bi bi-cassette-fill mx-1"></i> الطلبات
+          </a>
+        </li>
+        <li>
+          <a className="dropdown-item">
+            <i className="bi bi-heart mx-1"></i> المفضله
+          </a>
+        </li>
+
+      </>
+    ) : (
+      <>
+        <li>
+          <a className="dropdown-item">
+            <i className="bi bi-person fs-5 mx-1"></i> الحساب
+          </a>
+        </li>
+        <li>
+          <a className="dropdown-item">
+            <i className="bi bi-cassette-fill mx-1"></i> الطلبات
+          </a>
+        </li>
+        <li>
+  <a className="dropdown-item">
+    <i className="bi bi-envelope mx-1"></i> الواردة صندوق الرسائل
+  </a>
+</li>
+
+
+
+
+        <li>
+          <a className="dropdown-item">
+            <i className="bi bi-heart mx-1"></i> المفضله
+          </a>
+        </li>
+
+        <li>
+  <a className="dropdown-item">
+    <i className="bi bi-ticket-perforated mx-1"></i> قسائم الشراء
+  </a>
+</li>
+
+        <li><hr className="dropdown-divider" /></li>
+        <li>
+          <a className="dropdown-item " onClick={() => dispatch(logout())} style={{ cursor: 'pointer',color:"" }}>
+            <i className="bi bi-box-arrow-right mx-1"></i> تسجيل الخروج
+          </a>
+        </li>
+      </>
+    )}
+  </ul>
+</div>
 
                             <div className="dropdown mx-2 hov move">
                                 <a
