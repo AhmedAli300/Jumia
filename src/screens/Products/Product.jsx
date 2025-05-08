@@ -13,6 +13,7 @@ const Products = () => {
       .then(res => setProductList(res.data.data))
       .catch(err => console.error(err));
   }, []);
+  
 
   return (
     <div className="container my-5">
