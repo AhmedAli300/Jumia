@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Home from '../screens/Home/Home';
-
+import Products from "../screens/products/Products";
 import Details from '../screens/Details/Details';
 import NotFound from '../screens/Not_Found/NotFound';
 import Wishlist from '../screens/Wishlist/Wishlist';
@@ -11,7 +11,6 @@ import Cart from '../screens/Cart/CartItem';
 import EmptyCart from '../screens/Cart/emptyCart';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetails from '../Comoonents/Product details/ProductDetails';
-import Products from '../screens/Products/Product';
 const router = createBrowserRouter([
   {
     path: '/',
