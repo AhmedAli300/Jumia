@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import Overlay from "../../Comoonents/Overlay/Overlay";
-import "./Home.css";
-import { categories } from "./categpries";
+import "./Home.css"
+
+
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState({});
@@ -1797,6 +1796,7 @@ const Home = () => {
         />
       </div>
 
+
       <div className="container">
         <div className="text-center bg-danger p-3 w-100 m-auto rounded-2">
           <img className="w-100 rounded-2" src="./1200x200ar.png" alt="" />
@@ -2401,6 +2401,10 @@ const Home = () => {
         </a>
       </div>
 
+
+
+
+
       <div className="container">
         <h5 className="bg-cold p-3 text-center">✪ منتجات تريند ✪</h5>
         <div className="row  ">
@@ -2448,6 +2452,10 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+
+
+
 
       <div className="container">
         <div className="row bg-white my-5">
@@ -2567,6 +2575,12 @@ const Home = () => {
         </div>
       </div>
 
+
+
+
+
+
+
       <div className="container">
         <div className="row bg-white my-2">
           <div className="col-md-2">
@@ -2609,6 +2623,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+
 
       <div className="container">
         <a
@@ -2715,7 +2731,6 @@ const Home = () => {
           </div>
         </a>
       </div>
-
       <div className="container margn mt-4 ">
         <div className="row ">
           <div className="col-md-12 bagrond">
@@ -2999,6 +3014,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+
+
     </>
   );
 };

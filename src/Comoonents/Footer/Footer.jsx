@@ -14,8 +14,7 @@ const Footer = () => {
           <img
             style={{ height: "25px", borderRadius: "50%" }}
             src="/imgs1 (2).svg"
-            alt=""
-          />
+            alt="" />
           <p className="f-10">عربي</p>
         </div>
         <div
