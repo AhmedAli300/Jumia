@@ -3,6 +3,7 @@ import Overlay from "../../Comoonents/Overlay/Overlay";
 import "./Home.css";
 import { categories } from "./categpries";
 import Products from "../Products/Product";
+
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState({});

@@ -18,6 +18,8 @@ import Login4 from '../screens/Login/Login4';
 import Login5 from '../screens/Login/Login5';
 import Login6 from '../screens/Login/Login6';
 import Products from '../screens/Products/Product';
+// import Products from '../screens/Products/Product';
+
 
 const router = createBrowserRouter([
   {
