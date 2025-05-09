@@ -65,10 +65,10 @@ const Footer = () => {
                 </span>
               </div>
               <div className="foot-foorm">
-                <form action="" method="post" className="py-2 d-flex align-items-center">
+                <form action="" meliod="post" className="py-2 d-flex align-items-center">
                   <input type="text" placeholder="ادخل بريدك الالكتروني" />
                   <i className="fa-regular fa-envelope"></i>
-                  <button className="gander" value="male">زكر</button>
+                  <button className="gander" value="male">ذكر</button>
                   <button className="gander" value="female">انثي</button>
                 </form>
                 <div className="d-flex gap-2 my-2 align-items-start">
@@ -112,7 +112,7 @@ const Footer = () => {
           {/* Sec-1  */}
           <div className="d-flex">
             <ul className="col-3 item gap-1">
-              <th className="f-10">تحتاج مساعدة؟</th>
+              <li className="f-10">تحتاج مساعدة؟</li>
               <li><a href=""> تواصل معنا </a></li>
               <li><a href="">مركز المساعدة </a></li>
               <li><a href="">اتصل بنا </a></li>
@@ -126,7 +126,7 @@ const Footer = () => {
             </ul>
 
             <ul className="col-3 item gap-1">
-              <th className="font-10">من نحن</th>
+              <li className="font-10">من نحن</li>
               <li><a href=""> خدمات جوميا للشحن </a></li>
               <li><a href=""> انضم إلى جوميا </a></li>
               <li><a href=""> الشروط والأحكام </a></li>
@@ -139,7 +139,7 @@ const Footer = () => {
             </ul>
 
             <ul className="col-3 item gap-1">
-              <th className="font-10">ذود مبيعاتك</th>
+              <li className="font-10">ذود مبيعاتك</li>
               <li><a href="">بيع علي جوميا</a></li>
               <li><a href="">قاعدة معرفة التاجر (Vendor hub) </a></li>
               <li><a href="">كن شريكًا للخدمات اللوجستية </a></li>
@@ -147,7 +147,7 @@ const Footer = () => {
             </ul>
 
             <ul className="col-3 item gap-1">
-              <th className="font-10">جوميا دوليا</th>
+              <li className="font-10">جوميا دوليا</li>
               <div className="d-flex gap-4">
                 <div>
                   <li><a href="">الجزائر</a></li>
@@ -227,7 +227,7 @@ const Footer = () => {
 
             <ul className="col item gap-1">
               <li><a href="">Mesery</a></li>
-              <li><a href="">Mothercare</a></li>
+              <li><a href="">Moliercare</a></li>
               <li><a href="">NIVEA</a></li>
               <li><a href="">Nokia</a></li>
             </ul>

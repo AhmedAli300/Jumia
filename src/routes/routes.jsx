@@ -1,21 +1,23 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Home from '../screens/Home/Home';
-import Products from "../screens/products/Products";
+
 import Details from '../screens/Details/Details';
 import NotFound from '../screens/Not_Found/NotFound';
 import Wishlist from '../screens/Wishlist/Wishlist';
 import Login from '../screens/Login/Login';
-import Layout from '../Comoonents/Layout/Layout';
+import Layout from '../comoonents/Layout/Layout';
 import About from '../screens/About/About'
 import Cart from '../screens/Cart/CartItem';
 import EmptyCart from '../screens/Cart/emptyCart';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetails from '../Comoonents/Product details/ProductDetails';
+
 import Login2 from '../screens/Login/Login2';
 import Login3 from '../screens/Login/Login3';
 import Login4 from '../screens/Login/Login4';
 import Login5 from '../screens/Login/Login5';
 import Login6 from '../screens/Login/Login6';
+
 const router = createBrowserRouter([
   {
     path: '/',

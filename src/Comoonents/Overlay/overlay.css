@@ -1,0 +1,57 @@
+/* Overlay Component Styles */
+body{
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+
+}
+.overlay-container {
+    z-index: 9;
+    height: 600px;
+    max-height: 500px;
+    width: 900px;
+    align-items: flex-start;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    position: absolute;
+    top: 10;
+    right: 20%;
+    background: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, .075);
+    border: 1px solid #dee2e6;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.overlay-col {
+    min-width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 1.5rem;
+}
+
+.overlay-title {
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f1f1f1;
+    letter-spacing: 0.5px;
+    font-size: 1.08rem;
+    color: #222;
+}
+
+.overlay-list {
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.overlay-item {
+    margin-bottom: 0.5rem;
+    font-size: 0.98rem;
+    color: #555;
+    font-weight: 400;
+    line-height: 1.7;
+}
