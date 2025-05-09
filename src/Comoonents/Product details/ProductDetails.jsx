@@ -1,36 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../App.css";
 import "./ProductDetails.css";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const ProductDetails = () => {
+
+  const {id} = useParams();
+  const [product, setProduct] = useState({});
+  // console.log(product);
+  
+  useEffect(() => {
+    axios.get(`http://localhost:3000/api/v1/products/${id}`)
+      .then(res => setProduct(res.data))
+      .catch(err => console.error(err));
+      // console.log(product.id);
+      
+  } , []);
+
+
   return (
     <>
       <main className="row g-0 d-flex justify-content-center bg-gray">
         <section className="col-12 col-sm-7 mt-5 ms-3">
           <div className="bg-body-tertiary rounded">
             <div className="row d-flex p-3">
+              {console.log(product.product?.images[0]?.secure_url)}
+              {console.log(product.product)}
+              
               <div className="col-sm-12 col-md-4">
                 <img
-                  src="./images/1.jpg"
-                  alt="Product"
+                  src={product.product?.images[0]?.secure_url}
+                  alt={product.product?.name}
                   height="300"
                   className="w-100"
                 />
                 <img
-                  src="./images/1.jpg"
-                  alt="Product"
+                  src={product.product?.images[1]?.secure_url}
+                  alt={product.product?.name}
                   height="50"
                   className="pt-2"
                 />
                 <img
-                  src="./images/2.jpg"
-                  alt="Product"
+                  src={product.product?.images[2]?.secure_url}
+                  alt={product.product?.name}
                   height="50"
                   className="pt-2"
                 />
                 <img
-                  src="./images/3.jpg"
-                  alt="Product"
+                  src={product.product?.images[3]?.secure_url}
+                  alt={product.product?.name}
+                  height="50"
+                  className="pt-2"
+                />
+                <img
+                  src={product.product?.images[4]?.secure_url}
+                  alt={product.product?.name}
                   height="50"
                   className="pt-2"
                 />
@@ -57,11 +83,11 @@ const ProductDetails = () => {
 
               <div className="pe-2 col-sm-12 col-md-8">
                 <h5>
-                  Karimed وينك برو كريم لطفح الحفاضات للأطفال 30جم{" "}
+                  {product.product?.name}
                   <i className="fa-regular fa-heart pe-5 text-warning"></i>
                 </h5>
                 <p>
-                  الماركة :{" "}
+                  الماركة :{""}
                   <a
                     href="#"
                     className="link-underline link-underline-opacity-0"
@@ -79,11 +105,11 @@ const ProductDetails = () => {
                 </p>
                 <hr />
                 <p>
-                  <span className="fw-bolder">19.90 جنيه </span>
                   <del>25.00 جنيه</del>
                   <span className="bg-warning me-2 p-1">%20-</span>
+                  <span className="fw-bolder">{product?.product?.price}</span>
                 </p>
-                <p>In stock</p>
+                <p>{product?.product?.stock > 0 ? `${product?.product?.stock} : in stock `  : "out of stock"}</p>
                 <p>شحن مجاني الي 6 اكتوبر</p>
                 <p>
                   <i className="fa-solid fa-star text-warning"></i>
@@ -272,30 +298,11 @@ const ProductDetails = () => {
                             </div>
                             <div className="card-body">
                                 <ul className="list-unstyled mb-0">
-                                    <li className="mb-2">• خفيف القوام</li>
-                                    <li className="mb-2">• غير دهني</li>
-                                    <li className="mb-2">• بزيت الجوجوبا</li>
-                                    <li className="mb-2">• بزيت الزيتون</li>
-                                    <li className="mb-2">• بالعسل الطبيعي</li>
-                                    <li className="mb-2">• بالجليسرين</li>
-                                    <li className="mb-2">• سريع الإمتصاص</li>
+                                    <li className="mb-2">{product?.product?.name}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
-                   
-                    <div className="col-lg-5 col-sm-5 me-lg-4 me-sm-2">
-                        <div className="card specs-card h-100">
-                            <div className="card-header bg-white">
-                                <h5 className="mb-0">محتويات العبوه</h5>
-                            </div>
-                            <div className="card-body">
-                                <p className="mb-0">أنبوبة بلاستيكية احجم علبة ورقية 30جم</p>
-                            </div>
-                        </div>
-                    </div>
-
                     
                     <div className="col-5   mb-3 me-5">
                         <div className="card specs-card">
@@ -304,28 +311,7 @@ const ProductDetails = () => {
                             </div>
                             <div className="card-body">
                                 <div className="spec-row">
-                                    <span className="spec-label">SKU:</span>
-                                    <span className="spec-value">BR317ST1GDYIKNAFAMZ</span>
-                                </div>
-                                <div className="spec-row">
-                                    <span className="spec-label">الموديل:</span>
-                                    <span className="spec-value">WPC30</span>
-                                </div>
-                                <div className="spec-row">
-                                    <span className="spec-label">بلد الصنع:</span>
-                                    <span className="spec-value">Egypt</span>
-                                </div>
-                                <div className="spec-row">
-                                    <span className="spec-label">الحجم (طول×عرض×ارتفاع سم):</span>
-                                    <span className="spec-value">15*3*3</span>
-                                </div>
-                                <div className="spec-row">
-                                    <span className="spec-label">اللون:</span>
-                                    <span className="spec-value">white</span>
-                                </div>
-                                <div className="spec-row">
-                                    <span className="spec-label">الحاجه الرئيسية:</span>
-                                    <span className="spec-value">cream</span>
+                                    <span className="spec-value">{product?.product?.description}</span>
                                 </div>
                             </div>
                         </div>
@@ -483,7 +469,7 @@ const ProductDetails = () => {
             <h6 className="ps-2 pe-2">التوصيل والارجاع</h6>
             <hr className="p-0" />
             <img
-              src="./images/download (1).jpeg"
+              src="/download (1).jpeg"
               alt="jumia"
               height="50"
               width="150"
