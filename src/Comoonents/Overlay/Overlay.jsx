@@ -4,18 +4,22 @@ import "./Overlay.css";
 const Overlay = ({ isVisible, data }) => {
   if (!isVisible) return null;
   return (
-    <div className="overlay-container">
-      {data.map((subCategory, index) => (
-        <div key={index} className="overlay-col">
-          <h3 className="overlay-title">{subCategory.title}</h3>
-          <ul className="overlay-list">
-            {subCategory.items.map((item, itemIndex) => (
-              <li key={itemIndex} className="overlay-item">{item}</li>
-            ))}
-          </ul>
+    <>
+    {console.log(data?.categories?.map((cat) => cat.subcategories))};
+    {/* {console.log(data?.categories)}; */}
+     <div className="overlay-container">
+       {data?.categories?.map((cat, index) => (
+          <div key={index} className="overlay-col">
+            {/* <h3 className="overlay-title">{cat.name}</h3> */}
+            <ul className="overlay-list">
+              {cat.subcategories.map((sub, subIndex) => (
+                  <li key={subIndex} className="overlay-item">{sub.name}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+    </>
   );
 };
 
