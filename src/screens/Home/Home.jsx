@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
 import Overlay from "../../Comoonents/Overlay/Overlay";
 import "./Home.css";
-import { categories } from "./categpries";
+// import { categories } from "./categpries";
 import Products from "../Products/Product";
+import axios from "axios";
 
 const Home = () => {
+  useEffect(() => {
+    axios.get("http://127.0.0.1:3000/api/v1/categories")
+      .then((res) => setData(res.data.data))
+      .catch((err) => {console.log(err)})
+  }, [])
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState({});
-
-  const handleCategorhOVER = () => {
+  // console.log(data?.categories?.map((cat) => cat.name));
+  // console.log(data?.categories?.[0].name);
+  
+  
+  
+  const handleCategorHover = () => {
     setIsVisible(true);
 
-    setData(categories.find((cat) => cat.title == "أزياء").subcategories);
+    console.log(data?.categories?.find((cat) => cat.name == "الازياء").subcategories);
+    data?.categories?.find((cat) => cat.name == "الازياء").subcategories;
+    
+    console.log(data?.categories?.find((cat) => cat.name == "موبايلات وتابلت").subcategories);
+    
+    // console.log(data);
+    
+    
   };
   return (
     <>
@@ -22,11 +39,11 @@ const Home = () => {
             <a
               className="text-decoration-none first-link"
               href="#"
-              onMouseOver={handleCategorhOVER}
               onMouseLeave={() => setIsVisible(false)}
+              onMouseOver={handleCategorHover}
             >
               <i className="fa-solid fa-shirt "></i>
-              <span className="me-2">ازياء</span>
+              <span className="me-2">{data?.categories?.[0].name}</span>
             </a>
 
             <div
@@ -170,9 +187,9 @@ const Home = () => {
           </div>
 
           <div id="cat-2-link">
-            <a className="text-decoration-none" href="#">
+            <a className="text-decoration-none" href="#" >
               <i className="fa-solid fa-mobile"></i>
-              <span className="me-2">موبايلات وتابلت</span>
+              <span className="me-2">{data?.categories?.[1].name}</span>
             </a>
 
             <div
@@ -325,8 +342,9 @@ const Home = () => {
 
           <div id="cat-3-link">
             <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-camera"></i>
-              <span className="me-2">المنزل والاثاث</span>
+              
+              <i className="fa-solid fa-tv"></i>
+              <span className="me-2">{data?.categories?.[2].name}</span>
             </a>
 
             <div
@@ -480,7 +498,7 @@ const Home = () => {
           <div id="cat-4-link">
             <a className="text-decoration-none" href="#">
               <i className="fa-solid fa-house"></i>
-              <span className="me-2">اجهزه منزلية</span>
+              <span className="me-2">{data?.categories?.[3].name}</span>
             </a>
 
             <div
@@ -633,8 +651,8 @@ const Home = () => {
 
           <div id="cat-5-link">
             <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-tv"></i>
-              <span className="me-2">التلفزيونات والصوتيات</span>
+            <i className="fa-solid fa-apple-whole"></i>
+              <span className="me-2">{data?.categories?.[4].name}</span>
             </a>
 
             <div
@@ -787,8 +805,8 @@ const Home = () => {
 
           <div id="cat-6-link">
             <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-baby"></i>
-              <span className="me-2">منتجات العنايه بالاطفال</span>
+              <i className="fa-solid fa-dumbbell"></i>
+              <span className="me-2">{data?.categories?.[5].name}</span>
             </a>
 
             <div
@@ -942,7 +960,7 @@ const Home = () => {
           <div id="cat-7-link">
             <a className="text-decoration-none" href="#">
               <i className="fa-solid fa-apple-whole"></i>
-              <span className="me-2">بقالة</span>
+              <span className="me-2">{data?.categories?.[6].name}</span>
             </a>
 
             <div
@@ -1095,472 +1113,11 @@ const Home = () => {
 
           <div id="cat-8-link">
             <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-computer"></i>
-              <span className="me-2">الكمبيوتر</span>
-            </a>
-
-            <div
-              id="cat-8"
-              className="side-menue bg-white position-absolute end-100 p-1 d-flex gap-5 hidden"
-            >
-              <div className="d-flex flex-column cat">
-                <div className="cat p-1">
-                  <h6 className="border-bottom border-2 border-dark mb-2">
-                    كيبورد
-                  </h6>
-                  <div className="items d-flex flex-column">
-                    <a href="#" className="text-decoration-none">
-                      موبايل اندرويد
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      موبايل ios
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      هواتف
-                    </a>
-                  </div>
-                </div>
-                <div className="cat border-bottom p-1">
-                  <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                    ماوس
-                  </h6>
-                  <div className="items d-flex flex-column">
-                    <a href="#" className="text-decoration-none">
-                      {" "}
-                      تابلت
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      ايباد
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      {" "}
-                      تابلت تعليمي
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      اكسسوارات تابلت
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="cat border-bottom p-1">
-                <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                  شاشات
-                </h6>
-                <div className="items d-flex flex-column">
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                </div>
-              </div>
-              <div className="cat border-bottom p-1">
-                <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                  سوفتوير
-                </h6>
-                <div className="items d-flex flex-column">
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="cat-9-link">
-            <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-dumbbell"></i>
-              <span className="me-2">مستلزمات رياضة</span>
-            </a>
-
-            <div
-              id="cat-9"
-              className="side-menue bg-white position-absolute end-100 p-1 d-flex gap-5 hidden"
-            >
-              <div className="d-flex flex-column cat">
-                <div className="cat p-1">
-                  <h6 className="border-bottom border-2 border-dark mb-2">
-                    اوزان حديد
-                  </h6>
-                  <div className="items d-flex flex-column">
-                    <a href="#" className="text-decoration-none">
-                      موبايل اندرويد
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      موبايل ios
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      هواتف
-                    </a>
-                  </div>
-                </div>
-                <div className="cat border-bottom p-1">
-                  <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                    الات للمشي
-                  </h6>
-                  <div className="items d-flex flex-column">
-                    <a href="#" className="text-decoration-none">
-                      {" "}
-                      تابلت
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      ايباد
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      {" "}
-                      تابلت تعليمي
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      اكسسوارات تابلت
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="cat border-bottom p-1">
-                <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                  معدات تدريب القوه
-                </h6>
-                <div className="items d-flex flex-column">
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                </div>
-              </div>
-              <div className="cat border-bottom p-1">
-                <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                  ملابس رياضيه
-                </h6>
-                <div className="items d-flex flex-column">
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="cat-10-link">
-            <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-gamepad"></i>
-              <span className="me-2">العاب</span>
-            </a>
-
-            <div
-              id="cat-10"
-              className="side-menue bg-white position-absolute end-100 p-1 d-flex gap-5 hidden"
-            >
-              <div className="d-flex flex-column cat">
-                <div className="cat p-1">
-                  <h6 className="border-bottom border-2 border-dark mb-2">
-                    بلايستيشن 5
-                  </h6>
-                  <div className="items d-flex flex-column">
-                    <a href="#" className="text-decoration-none">
-                      موبايل اندرويد
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      موبايل ios
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      هواتف
-                    </a>
-                  </div>
-                </div>
-                <div className="cat border-bottom p-1">
-                  <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                    بلايستيشن 5
-                  </h6>
-                  <div className="items d-flex flex-column">
-                    <a href="#" className="text-decoration-none">
-                      {" "}
-                      تابلت
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      ايباد
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      {" "}
-                      تابلت تعليمي
-                    </a>
-                    <a href="#" className="text-decoration-none">
-                      اكسسوارات تابلت
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="cat border-bottom p-1">
-                <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                  بلايستيشن 3
-                </h6>
-                <div className="items d-flex flex-column">
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                </div>
-              </div>
-              <div className="cat border-bottom p-1">
-                <h6 className="border-bottom border-2 border-dark mb-2 pb-1">
-                  بلايستيشن 2
-                </h6>
-                <div className="items d-flex flex-column">
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    ساعه زكيه
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعه بلوتوث
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    سماعات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    جرابات الموبايل
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    اسكرينات
-                  </a>
-                  <a href="#" className="text-decoration-none">
-                    باور بانك
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-ellipsis border border-dark rounded-circle p-1"></i>
-              <span className="me-2">اقسام اخري</span>
+            <i className="fa-solid fa-baby"></i>
+              <span className="me-2">{data?.categories?.[7].name}</span>
             </a>
           </div>
+
         </aside>
 
         <div

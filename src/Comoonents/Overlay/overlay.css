@@ -6,8 +6,8 @@ body{
 }
 .overlay-container {
     z-index: 9;
-    height: 600px;
-    max-height: 500px;
+    height: 500px;
+    max-height: 400px;
     width: 900px;
     align-items: flex-start;
     font-family: 'Segoe UI', Arial, sans-serif;
@@ -30,7 +30,7 @@ body{
     margin-bottom: 1.5rem;
 }
 
-.overlay-title {
+/* .overlay-title {
     text-transform: uppercase;
     font-weight: 700;
     padding-bottom: 0.5rem;
@@ -39,7 +39,7 @@ body{
     letter-spacing: 0.5px;
     font-size: 1.08rem;
     color: #222;
-}
+} */
 
 .overlay-list {
     list-style: none;
