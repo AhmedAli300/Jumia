@@ -20,13 +20,15 @@
     align-items: center;
     flex-wrap: wrap;
 } */
-
+.ttt{
+  font-family:'Roboto', sans-serif;
+      color: #4a4a4a;
+}
 .remove-btn {
     cursor: pointer;
     font-size: 14px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .cart-product {
         flex-direction: column;
@@ -41,11 +43,22 @@
     }
 }
 
-
-
+.trs{
+    color:#f8982d ;
+}
 .empty-cart{
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     background: #fff;
     margin: 20px 10%;
     width: 80%;
+}
+
+.darkred{
+   color: #b81a0a;
+   font-size: 12px;
+}
+
+.spin{
+    color:#f8982d ;
+    font-size: 14px;
 }

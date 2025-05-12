@@ -34,10 +34,12 @@ body{
     font-size: 18px;
     padding-top: 13px;
     padding-bottom: 13px;
+    border:none;
+
   }
 
   .btnn:hover {
-    background-color: #f8982d; 
+    background-color:rgb(243, 140, 22); 
     color: white;
   }
 
@@ -49,8 +51,9 @@ body{
   }
 
   .btn-facebook:hover {
-    background-color: #1877f2;
+    background-color:rgb(8, 100, 219);
     color: white;
+
   }
 
   .foo0ter {
@@ -58,3 +61,66 @@ body{
     margin-top: 20px;
     color: #333;
   }
+
+  .fontText{
+    font-family:'Roboto', sans-serif;
+  }
+
+  .tttt{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5em;
+    margin: 8px 0 16px;
+    color: #4a4a4a;
+  }
+
+  .coloremail{
+    background-color: #eee;
+    display: flex;
+    margin: 32px 0 32px;
+    padding: 16px;
+    border:none;
+    outline:none;
+    color: #000!important;
+    font-size: 13px;
+  }
+  .form-control{
+    border:none;
+    outline:none;
+    border-color:white;
+  }
+
+  .eromess{
+    font-size:12px;
+  }
+
+  .svgStyle{
+    border-radius: 50%;
+    background-color: #4a4a4a;
+    padding: 1px  4px 6px;
+
+    text-align: center;
+    margin: 0 auto;
+    font-size: 16px;
+
+  }
+
+  .svgStyle {
+  display: inline-block;
+  margin-bottom: 10px; 
+}
+.mb-3 {
+  position: relative;
+}
+
+.svgStyle {
+  position: absolute;
+  top: 26px;
+  right: 36%;
+  transform: translateX(-50%);
+}
+
+.posheghit{
+  border:#4a4a4a 1px solid!important;
+  height: 60px !important;
+}

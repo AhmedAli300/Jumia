@@ -4,20 +4,41 @@ import "./ProductDetails.css";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from 'react-redux';
+import { addItem, fetchCart } from '../../store/Slice/cartSlice';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = () => {
 
-  const {id} = useParams();
+  const { id } = useParams();
   const [product, setProduct] = useState({});
   // console.log(product);
-  
+
   useEffect(() => {
     axios.get(`http://localhost:3000/api/v1/products/${id}`)
       .then(res => setProduct(res.data))
       .catch(err => console.error(err));
-      // console.log(product.id);
-      
-  } , []);
+    // console.log(product.id);
+
+  }, []);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+
+  const handleAddToCart = () => {
+    dispatch(addItem({ productId: product.product?._id, quantity: 1 }))
+      .then(() => {
+        toast.success('تمت إضافة المنتج للسلة بنجاح');
+        navigate('/cart');
+        dispatch(fetchCart());
+      })
+      .catch(() => {
+        toast.error('حدث خطأ أثناء إضافة المنتج للسلة');
+      });
+  };
 
 
   return (
@@ -28,7 +49,7 @@ const ProductDetails = () => {
             <div className="row d-flex p-3">
               {console.log(product.product?.images[0]?.secure_url)}
               {console.log(product.product)}
-              
+
               <div className="col-sm-12 col-md-4">
                 <img
                   src={product.product?.images[0]?.secure_url}
@@ -109,7 +130,7 @@ const ProductDetails = () => {
                   <span className="bg-warning me-2 p-1">%20-</span>
                   <span className="fw-bolder">{product?.product?.price}</span>
                 </p>
-                <p>{product?.product?.stock > 0 ? `${product?.product?.stock} : in stock `  : "out of stock"}</p>
+                <p>{product?.product?.stock > 0 ? `${product?.product?.stock} : in stock ` : "out of stock"}</p>
                 <p>شحن مجاني الي 6 اكتوبر</p>
                 <p>
                   <i className="fa-solid fa-star text-warning"></i>
@@ -125,10 +146,19 @@ const ProductDetails = () => {
                   </a>
                 </p>
                 <div className="d-grid gap-2 mt-2 bg-body-tertiary rounded">
-                  <button className="btn orang text-light" type="button">
+                  {/* <button className="btn orang text-light" type="button">
                     <i className="fa-solid fa-cart-shopping ms-5"></i>اضافة لسلة
                     التسوق
+                  </button> */}
+
+                  <button className="btn orang text-light" type="button"
+                    onClick={handleAddToCart}
+                  >
+                    <i className="fa-solid fa-cart-shopping ms-5"></i>
+                    اضافة لسلة التسوق
+
                   </button>
+
                 </div>
                 <hr />
                 <p>عروض</p>
@@ -282,183 +312,183 @@ const ProductDetails = () => {
           </div>
 
           <div className="details-container bg-body-tertiary rounded mt-3" id="des2">
-                <h3 className="p-2 ">المواصفات</h3>
-                <p className="pe-2">
-                <a href="#" className="link-underline link-underline-opacity-0">
-                  <i className="fa-solid fa-ellipsis"></i>
-                </a>
-              </p>
+            <h3 className="p-2 ">المواصفات</h3>
+            <p className="pe-2">
+              <a href="#" className="link-underline link-underline-opacity-0">
+                <i className="fa-solid fa-ellipsis"></i>
+              </a>
+            </p>
 
-                <div className="row g-4">
-                    
-                    <div className="col-lg-5 col-sm-5 me-5">
-                        <div className="card specs-card h-100">
-                            <div className="card-header bg-white">
-                                <h5 className="mb-0">المواصفات الرئيسية</h5>
-                            </div>
-                            <div className="card-body">
-                                <ul className="list-unstyled mb-0">
-                                    <li className="mb-2">{product?.product?.name}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="col-5   mb-3 me-5">
-                        <div className="card specs-card">
-                            <div className="card-header bg-white">
-                                <h5 className="mb-0">المواصفات</h5>
-                            </div>
-                            <div className="card-body">
-                                <div className="spec-row">
-                                    <span className="spec-value">{product?.product?.description}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className="row g-4">
+
+              <div className="col-lg-5 col-sm-5 me-5">
+                <div className="card specs-card h-100">
+                  <div className="card-header bg-white">
+                    <h5 className="mb-0">المواصفات الرئيسية</h5>
+                  </div>
+                  <div className="card-body">
+                    <ul className="list-unstyled mb-0">
+                      <li className="mb-2">{product?.product?.name}</li>
+                    </ul>
+                  </div>
                 </div>
+              </div>
+
+              <div className="col-5   mb-3 me-5">
+                <div className="card specs-card">
+                  <div className="card-header bg-white">
+                    <h5 className="mb-0">المواصفات</h5>
+                  </div>
+                  <div className="card-body">
+                    <div className="spec-row">
+                      <span className="spec-value">{product?.product?.description}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
           <div className="bg-body-tertiary rounded mt-3" id="des3">
             <div className="feedback-container">
-                
-                <div className="header-section">
-                    <h2 className="h5 mb-0">آراء العملاء الموثقة</h2>
-                    <a href="#" className="see-all">عرض الكل &gt;</a>
-                </div>
 
-                
-                <div className="ratings-review-tabs">
-                    <a href="#" className="tab">تقييمات موثقة للمنتج <span>(98)</span></a>
-                    <a href="#" className="tab">تعليقات المنتج <span>(19)</span></a>
-                </div>
+              <div className="header-section">
+                <h2 className="h5 mb-0">آراء العملاء الموثقة</h2>
+                <a href="#" className="see-all">عرض الكل &gt;</a>
+              </div>
 
-                <div className="row">
-                   
-                    <div className="col-md-4">
-                        <div className="rating-summary">
-                            <div className="average-rating">3.8<span className="rating-scale">/5</span></div>
-                            <div className="stars mb-2">
-                                <span className="star">★</span>
-                                <span className="star">★</span>
-                                <span className="star">★</span>
-                                <span className="star">★</span>
-                                <span className="star empty-star">★</span>
-                            </div>
-                            <div className="text-muted">98 ‎تقييمات موثقة للمنتج</div>
-                        </div>
 
-                       
-                        <div className="rating-bars">
-                            <div className="rating-row">
-                                <div className="rating-label">5</div>
-                                <div className="rating-count">(3)</div>
-                                <div className="rating-bar">
-                                    <div className="rating-fill" style={{"width": "50%"}}></div>
-                                </div>
-                            </div>
-                            <div className="rating-row">
-                                <div className="rating-label">4</div>
-                                <div className="rating-count">(1)</div>
-                                <div className="rating-bar">
-                                    <div className="rating-fill" style={{"width": "16.7%"}}></div>
-                                </div>
-                            </div>
-                            <div className="rating-row">
-                                <div className="rating-label">3</div>
-                                <div className="rating-count">(1)</div>
-                                <div className="rating-bar">
-                                    <div className="rating-fill" style={{"width": "16.7%"}}></div>
-                                </div>
-                            </div>
-                            <div className="rating-row">
-                                <div className="rating-label">2</div>
-                                <div className="rating-count">(0)</div>
-                                <div className="rating-bar">
-                                    <div className="rating-fill" style={{"width": "0%"}}></div>
-                                </div>
-                            </div>
-                            <div className="rating-row">
-                                <div className="rating-label">1</div>
-                                <div className="rating-count">(1)</div>
-                                <div className="rating-bar">
-                                    <div className="rating-fill" style={{"width": "16.7%"}}></div>
-                                </div>
-                            </div>
-                        </div>
+              <div className="ratings-review-tabs">
+                <a href="#" className="tab">تقييمات موثقة للمنتج <span>(98)</span></a>
+                <a href="#" className="tab">تعليقات المنتج <span>(19)</span></a>
+              </div>
+
+              <div className="row">
+
+                <div className="col-md-4">
+                  <div className="rating-summary">
+                    <div className="average-rating">3.8<span className="rating-scale">/5</span></div>
+                    <div className="stars mb-2">
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star">★</span>
+                      <span className="star empty-star">★</span>
                     </div>
+                    <div className="text-muted">98 ‎تقييمات موثقة للمنتج</div>
+                  </div>
 
-                    
-                    <div className="col-md-8">
-                        <div className="review-section">
-                            <div className="review">
-                                <div className="review-rating">
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                </div>
-                                <div className="review-title">ممتاز</div>
-                                <div className="review-content mb-2">ممتاز</div>
-                                <div className="review-meta">
-                                    <span>19-01-2025 بواسطة Samar</span>
-                                    <span className="verified-badge">
-                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                            <path
-                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                        </svg>
-                                        شراء موثق
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="review">
-                                <div className="review-rating">
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                </div>
-                                <div className="review-title">جمييل</div>
-                                <div className="review-content mb-2">تحفه وبيدي طبقه حمايه حلوة...اشتريت منه تاني</div>
-                                <div className="review-meta">
-                                    <span>19-01-2025 بواسطة Samar</span>
-                                    <span className="verified-badge">
-                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                            <path
-                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                        </svg>
-                                        شراءموثق
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="review">
-                                <div className="review-rating">
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                    <span className="star">★</span>
-                                </div>
-                                <div className="review-title">جيد لكن لم يناسب طقلي</div>
-                                <div className="review-content mb-2">غير مناسب للبشرة الحساسة</div>
-                                <div className="review-meta">
-                                    <span>19-01-2025 بواسطة Amira</span>
-                                    <span className="verified-badge">
-                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                            <path
-                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
-                                        </svg>
-                                        شراء موثق
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+
+                  <div className="rating-bars">
+                    <div className="rating-row">
+                      <div className="rating-label">5</div>
+                      <div className="rating-count">(3)</div>
+                      <div className="rating-bar">
+                        <div className="rating-fill" style={{ "width": "50%" }}></div>
+                      </div>
                     </div>
+                    <div className="rating-row">
+                      <div className="rating-label">4</div>
+                      <div className="rating-count">(1)</div>
+                      <div className="rating-bar">
+                        <div className="rating-fill" style={{ "width": "16.7%" }}></div>
+                      </div>
+                    </div>
+                    <div className="rating-row">
+                      <div className="rating-label">3</div>
+                      <div className="rating-count">(1)</div>
+                      <div className="rating-bar">
+                        <div className="rating-fill" style={{ "width": "16.7%" }}></div>
+                      </div>
+                    </div>
+                    <div className="rating-row">
+                      <div className="rating-label">2</div>
+                      <div className="rating-count">(0)</div>
+                      <div className="rating-bar">
+                        <div className="rating-fill" style={{ "width": "0%" }}></div>
+                      </div>
+                    </div>
+                    <div className="rating-row">
+                      <div className="rating-label">1</div>
+                      <div className="rating-count">(1)</div>
+                      <div className="rating-bar">
+                        <div className="rating-fill" style={{ "width": "16.7%" }}></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+
+                <div className="col-md-8">
+                  <div className="review-section">
+                    <div className="review">
+                      <div className="review-rating">
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                      </div>
+                      <div className="review-title">ممتاز</div>
+                      <div className="review-content mb-2">ممتاز</div>
+                      <div className="review-meta">
+                        <span>19-01-2025 بواسطة Samar</span>
+                        <span className="verified-badge">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                              d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                          </svg>
+                          شراء موثق
+                        </span>
+                      </div>
+                    </div>
+                    <div className="review">
+                      <div className="review-rating">
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                      </div>
+                      <div className="review-title">جمييل</div>
+                      <div className="review-content mb-2">تحفه وبيدي طبقه حمايه حلوة...اشتريت منه تاني</div>
+                      <div className="review-meta">
+                        <span>19-01-2025 بواسطة Samar</span>
+                        <span className="verified-badge">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                              d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                          </svg>
+                          شراءموثق
+                        </span>
+                      </div>
+                    </div>
+                    <div className="review">
+                      <div className="review-rating">
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                        <span className="star">★</span>
+                      </div>
+                      <div className="review-title">جيد لكن لم يناسب طقلي</div>
+                      <div className="review-content mb-2">غير مناسب للبشرة الحساسة</div>
+                      <div className="review-meta">
+                        <span>19-01-2025 بواسطة Amira</span>
+                        <span className="verified-badge">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                              d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                          </svg>
+                          شراء موثق
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
         </section>
 
         <aside className="col-12 col-sm-3 mt-5">
@@ -611,19 +641,19 @@ const ProductDetails = () => {
                 className="list-group-item list-group-item-action active-background"
                 aria-current="true"
               >
-                <i className="fa-solid fa-file"></i><a href="#des1" style={{"textDecoration":"none"}}> مواصفات المنتج</a> </button>
+                <i className="fa-solid fa-file"></i><a href="#des1" style={{ "textDecoration": "none" }}> مواصفات المنتج</a> </button>
               <button
                 type="button"
                 className="list-group-item list-group-item-action"
               >
-                <i className="fa-solid fa-list"></i><a href="#des2" style={{"textDecoration":"none"}}> المواصفات
-              </a></button>
+                <i className="fa-solid fa-list"></i><a href="#des2" style={{ "textDecoration": "none" }}> المواصفات
+                </a></button>
               <button
                 type="button"
                 className="list-group-item list-group-item-action"
               >
-                <i className="fa-brands fa-ideal"></i><a href="#des3" style={{"textDecoration":"none"}}> اراء العملاء الموثقه
-              </a></button>
+                <i className="fa-brands fa-ideal"></i><a href="#des3" style={{ "textDecoration": "none" }}> اراء العملاء الموثقه
+                </a></button>
             </div>
           </div>
 
