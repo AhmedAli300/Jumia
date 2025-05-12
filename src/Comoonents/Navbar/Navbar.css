@@ -79,8 +79,8 @@
 }
 .ssicon {
   position: absolute;
-  right:28%;
-  top: 18.5%;
+  right:30%;
+  top: 6.8%;
   transform: translateY(-50%);
   color: gray;
 }
@@ -125,7 +125,12 @@
 .hov:hover {
   color: #fe9a24 !important;
 }
+.logout{
+ color: #fe9a24 !important;
+ text-align: center;
+ margin-top: 0!important;
 
+}
 .hov:hover {
   color: #fe9a24 !important;
 }
