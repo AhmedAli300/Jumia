@@ -6,47 +6,85 @@ import Products from "../Products/Product";
 import axios from "axios";
 
 const Home = () => {
-  useEffect(() => {
-    axios.get("http://127.0.0.1:3000/api/v1/categories")
-      .then((res) => setData(res.data.data))
-      .catch((err) => {console.log(err)})
-  }, [])
-  const [isVisible, setIsVisible] = useState(false);
-  const [data, setData] = useState({});
-  // console.log(data?.categories?.map((cat) => cat.name));
-  // console.log(data?.categories?.[0].name);
-  
-  
-  
-  const handleCategorHover = () => {
-    setIsVisible(true);
 
-    console.log(data?.categories?.find((cat) => cat.name == "الازياء").subcategories);
-    data?.categories?.find((cat) => cat.name == "الازياء").subcategories;
+
+ 
+    const [categories, setCategories] = useState([]);
+    const [activeCategoryId, setActiveCategoryId] = useState(null);
+  
+    useEffect(() => {
+      axios.get('http://127.0.0.1:3000/api/v1/categories')
+        .then(res => setCategories(res.data.data.categories))
+        .catch(err => console.error(err));
+    }, []) 
+    console.log(categories);
     
-    console.log(data?.categories?.find((cat) => cat.name == "موبايلات وتابلت").subcategories);
-    
-    // console.log(data);
-    
-    
-  };
+  // useEffect(() => {
+  //   axios
+  //     .get("http://127.0.0.1:3000/api/v1/categories")
+  //     .then((res) => setData(res.data.data))
+  //     .catch((err) => {
+
+  //     });
+  // }, []);
+
+  
+  // const [isVisible, setIsVisible] = useState(false);
+  // const [data, setData] = useState({});
+
+  // const handleCategorHover = () => {
+  //   setIsVisible(true);
+
+  //   console.log(
+  //     // data?.categories?.find((cat) => cat.name == "الازياء").subcategories
+  //   );
+  //   // data?.categories?.find((cat) => cat.name == "الازياء").subcategories;
+
+  //   console.log(data?.categories?.find((cat) => cat.name == "موبايلات وتابلت").subcategories);
+
+  //   console.log(data);
+  // };
   return (
     <>
-      <Overlay isVisible={isVisible} data={data} />
+      {/* <div className="position-absolute w-100 ">
+        <Overlay isVisible={isVisible} data={data} />
+      </div> */}
       <section className="hero-section container mx-auto row p-3">
         <aside className="bg-white col-md-2 d-none p-3 d-md-flex flex-column justify-content-between text-end position-relative">
           <div className="cat-1">
-            <a
+          <div className="category-menu">
+          {categories?.map(category => (
+            <div
+              key={category.id}
+              className="category-item"
+              onMouseEnter={() => setActiveCategoryId(category.id)}
+              onMouseLeave={() => setActiveCategoryId(null)}
+            >
+          <a href="#" className="category-link">{category.name}</a>
+            
+          {activeCategoryId === category.id && (
+            <div className="subcategory-list">
+              {category?.subcategories?.map(sub => (
+                <a key={sub.id} href="#" className="subcategory-item">
+                  {sub.name}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+            {/* <a
               className="text-decoration-none first-link"
               href="#"
               onMouseLeave={() => setIsVisible(false)}
               onMouseOver={handleCategorHover}
             >
               <i className="fa-solid fa-shirt "></i>
-              <span className="me-2">{data?.categories?.[0].name}</span>
-            </a>
+              <span className="me-2 ">{data?.categories?.[0].name}</span>
+            </a> */}
 
-            <div
+            {/* <div
               id="id"
               className="side-menue shadow bg-white position-absolute end-100 p-1 d-flex gap-5 hidden"
             >
@@ -183,16 +221,19 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div id="cat-2-link">
-            <a className="text-decoration-none" href="#" >
-              <i className="fa-solid fa-mobile"></i>
-              <span className="me-2">{data?.categories?.[1].name}</span>
+            <a className="text-decoration-none" href="#"
+            // onMouseLeave={() => setIsVisible(false)}
+            // onMouseOver={handleCategorHover}
+            >
+              {/* <i className="fa-solid fa-mobile"></i> */}
+              {/* <span className="me-2">{data?.categories?.[1].name}</span> */}
             </a>
 
-            <div
+            {/* <div
               id="cat-2"
               className="side-menue bg-white position-absolute end-100 p-1 d-flex gap-5 hidden"
             >
@@ -337,14 +378,16 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div id="cat-3-link">
-            <a className="text-decoration-none" href="#">
-              
-              <i className="fa-solid fa-tv"></i>
-              <span className="me-2">{data?.categories?.[2].name}</span>
+            <a className="text-decoration-none" href="#"
+              // onMouseLeave={() => setIsVisible(false)}
+              // onMouseOver={handleCategorHover}
+            >
+              {/* <i className="fa-solid fa-tv"></i> */}
+              {/* <span className="me-2">{data?.categories?.[2].name}</span> */}
             </a>
 
             <div
@@ -497,8 +540,8 @@ const Home = () => {
 
           <div id="cat-4-link">
             <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-house"></i>
-              <span className="me-2">{data?.categories?.[3].name}</span>
+              {/* <i className="fa-solid fa-house"></i> */}
+              {/* <span className="me-2">{data?.categories?.[3].name}</span> */}
             </a>
 
             <div
@@ -651,11 +694,11 @@ const Home = () => {
 
           <div id="cat-5-link">
             <a className="text-decoration-none" href="#">
-            <i className="fa-solid fa-apple-whole"></i>
-              <span className="me-2">{data?.categories?.[4].name}</span>
+              {/* <i className="fa-solid fa-apple-whole"></i> */}
+              {/* <span className="me-2">{data?.categories?.[4].name}</span> */}
             </a>
 
-            <div
+            {/* <div
               id="cat-5"
               className="side-menue bg-white position-absolute end-100 p-1 d-flex gap-5 hidden"
             >
@@ -800,16 +843,16 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div id="cat-6-link">
             <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-dumbbell"></i>
-              <span className="me-2">{data?.categories?.[5].name}</span>
+              {/* <i className="fa-solid fa-dumbbell"></i> */}
+              {/* <span className="me-2">{data?.categories?.[5].name}</span> */}
             </a>
 
-            <div
+            {/* <div
               id="cat-6"
               className="side-menue bg-white position-absolute end-100 p-1 d-flex gap-5 hidden"
             >
@@ -954,13 +997,13 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div id="cat-7-link">
             <a className="text-decoration-none" href="#">
-              <i className="fa-solid fa-apple-whole"></i>
-              <span className="me-2">{data?.categories?.[6].name}</span>
+              {/* <i className="fa-solid fa-apple-whole"></i> */}
+              {/* <span className="me-2">{data?.categories?.[6].name}</span> */}
             </a>
 
             <div
@@ -1113,11 +1156,10 @@ const Home = () => {
 
           <div id="cat-8-link">
             <a className="text-decoration-none" href="#">
-            <i className="fa-solid fa-baby"></i>
-              <span className="me-2">{data?.categories?.[7].name}</span>
+              {/* <i className="fa-solid fa-baby"></i> */}
+              {/* <span className="me-2">{data?.categories?.[7].name}</span> */}
             </a>
           </div>
-
         </aside>
 
         <div

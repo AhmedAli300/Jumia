@@ -73,14 +73,16 @@ img {
   cursor: pointer;
   box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.2);
 }
-
+/* * {
+  border: 1px solid red;
+} */
 .side-menue {
   height: 450px;
   width: 850px;
   /* z-index: 10; */
   top: 0;
 }
-.side-menue h6{
+.side-menue h6 {
   margin: 0;
 }
 .cat {
@@ -93,78 +95,63 @@ img {
 }
 
 .hidden {
-  /* display: none !important; */
+
   visibility: hidden !important;
-  z-index: 2;
-  position: absolute;
+
 }
 /*  */
-.first-link:hover .hidden{
-  /* display: block !important; */
-  /* transition: all 0.5s ease-in-out; */
-  /* opacity: 1; */
-  visibility: visible !important;
-  /* background-color: red !important;  */
-  z-index: 3 !important;
-}
-.carousel-inner{
+.carousel-inner {
   z-index: 1;
 }
 /*  */
 
 /* Mahmoud Elshafeey */
 
-body{
+body {
   background-color: #f1f1f1;
 }
 
-.img-hover{
-
+.img-hover {
   cursor: pointer;
 }
 .img-hover:hover {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-
-
-
 }
 
-
-.img-scale:hover{
+.img-scale:hover {
   transform: scale(1.1);
 }
 
-.bg-bauty{
+.bg-bauty {
   background-color: #eed4d5;
 }
-.bg-cold{
+.bg-cold {
   background-color: #ede5f3;
 }
-.bg-fff2d6{
+.bg-fff2d6 {
   background-color: #fff2d6;
 }
 
-.bg-0099ff{
- background-color: #0099ff;
+.bg-0099ff {
+  background-color: #0099ff;
 }
 
-.bagrond{
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .05);
+.bagrond {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.05);
   background-color: #fff;
 }
-.content-section{
-    padding:0 10px;
+.content-section {
+  padding: 0 10px;
 }
-.content-section h1{
-    font-weight: 700;
-    font-size: 1.5rem;
-    /* color: #333; */
-    padding: 10px 0;
-    letter-spacing: -.5px;
+.content-section h1 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  /* color: #333; */
+  padding: 10px 0;
+  letter-spacing: -0.5px;
 }
-.content-section p{
-    font-size: 14px;
-    color: #313133;
-    font-weight: 300;
+.content-section p {
+  font-size: 14px;
+  color: #313133;
+  font-weight: 300;
 }
-
