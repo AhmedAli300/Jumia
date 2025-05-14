@@ -1,0 +1,15 @@
+body{
+    background-color: rgb(211, 208, 208);
+    margin: 0;
+    margin-top: 2%;
+    padding: 0;
+}
+
+.title{
+    background-color: white;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 600;
+}

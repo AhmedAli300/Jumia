@@ -32,6 +32,7 @@ const CartSide = ({ cart }) => {
             padding: "10px",
             fontSize: "16px"
           }}
+          
         >
           الإجمالي ({cart?.cartTotal?.toFixed(2)} جنيه)
         </button>
