@@ -5,7 +5,7 @@ const Overlay = ({ isVisible, data }) => {
   if (!isVisible) return null;
   return (
     <>
-    {console.log(data?.categories?.map((cat) => cat.subcategories))};
+    {/* {console.log(data?.categories?.map((cat) => cat.subcategories))}; */}
     {/* {console.log(data?.categories)}; */}
      <div className="overlay-container">
        {data?.categories?.map((cat, index) => (
