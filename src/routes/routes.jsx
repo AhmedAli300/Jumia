@@ -20,6 +20,7 @@ import Login6 from '../screens/Login/Login6';
 import Products from '../screens/Products/Product';
 import SignUp from '../screens/SignUp/SignUp';
 import Sign2 from '../screens/SignUp/Sign2';
+import SelectDeliveryAddress from '../screens/Order/SelectDeliveryAddress/SelectDeliveryAddress';
 // import Products from '../screens/Products/Product';
 
 
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
         element: <EmptyCart />,
         errorElement: <NotFound />
       },
+      {
+        path: 'order',
+        element: <SelectDeliveryAddress/>,
+        errorElement: <NotFound />
+      }
 
       // {
       //   path: 'favourte',

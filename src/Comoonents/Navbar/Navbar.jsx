@@ -81,7 +81,7 @@ const Navbar = () => {
           </div>
 
           <form className="d-flex search-bar mx-auto align-items-center" style={{ width: '100%', maxWidth: '550px' }}>
-            <i className="bi bi-search search-icon ssicon"></i>
+            {/* <i className="bi bi-search search-icon ssicon"></i> */}
             <input
               className="form-control px-5"
               type="search"
