@@ -1,5 +1,5 @@
 import React from "react";
-import "./SelectDeliveryAddress.css";
+// import "./SelectDeliveryAddress.css";
 import { MdOutlinePermPhoneMsg } from "react-icons/md";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { SiSpringsecurity } from "react-icons/si";
