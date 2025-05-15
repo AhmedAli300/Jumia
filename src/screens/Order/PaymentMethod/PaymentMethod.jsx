@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
-// import "./PaymentMethod.css";
+import "./PaymentMethod.css";
 
 export const PaymentForm = () => {
   const stripe = useStripe();
@@ -83,7 +83,7 @@ export const PaymentForm = () => {
           <div className="card-element">
             <CardElement />
           </div>
-          <button type="submit" disabled={!stripe || loading}>
+          <button className="bttn" type="submit" disabled={!stripe || loading}>
             {loading ? "جارٍ المعالجة..." : "ادفع الآن"}
           </button>
           {message && (

@@ -1,5 +1,5 @@
 import React from "react";
-// import "./SelectDeliveryAddress.css";
+import "./SelectDeliveryAddress.css";
 import { MdOutlinePermPhoneMsg } from "react-icons/md";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { SiSpringsecurity } from "react-icons/si";
@@ -19,21 +19,11 @@ const stripePromise = loadStripe("YOUR_PUBLISHABLE_STRIPE_KEY");
 
 const SelectDeliveryAddress = () => {
   return (
-    <>
+    <div className="order">
       <div
-        className="title my-3"
+        className="title"
         style={{ height: "90px", backgroundColor: "white", width: "100%" }}
       >
-        {/* <h1
-          style={{
-            marginTop: "20px",
-            marginLeft: "20px",
-            fontFamily: "sans-serif",
-            fontSize: "90%",
-          }}
-        >
-          <MdStars color="orange" /> JUMIA
-        </h1> */}
 
         <div style={{ fontSize: "80%" }}>اختيار عنوان تسليم</div>
 
@@ -338,7 +328,7 @@ const SelectDeliveryAddress = () => {
           3.طريقة الدفع
         </h6>
         <Elements stripe={stripePromise}>
-          {/* <PaymentForm /> */}
+          <PaymentForm />
         </Elements>
       </div>
 
@@ -346,7 +336,7 @@ const SelectDeliveryAddress = () => {
         <IoIosArrowForward />
         العودة الى المشتريات
       </a>
-    </>
+    </div>
   );
 };
 
