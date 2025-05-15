@@ -62,9 +62,7 @@ body{
     position: relative;
   }
   
-  .category-item {
-    position: relative;
-  }
+
   
   .category-link {
     text-decoration: none;
@@ -73,15 +71,15 @@ body{
   }
   
   .subcategory-list {
+    position: absolute;
+    top: 0%;
+    right: 90%;
     z-index: 10;
     height: 200px;
     width: 900px;
     max-height: 500px;
     align-items: flex-start;
     font-family: 'Segoe UI', Arial, sans-serif;
-    position: absolute;
-    top: -150%;
-    right: 90%;
     background: white;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, .075);
     /* border: 1px solid #dee2e6; */
@@ -94,7 +92,7 @@ body{
   .subcategory-item {
     text-decoration: none;
     color: #555;
-    padding: 5px;
+    padding: 2px;
   }
   
   /* .subcategory-item:hover {
