@@ -1,4 +1,4 @@
-/* .payment-container {
+.payment-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -31,7 +31,7 @@
     margin-bottom: 20px;
   }
   
-  button {
+  .bttn {
     width: 100%;
     background-color: #4f46e5;
     color: white;
@@ -43,12 +43,12 @@
     transition: background-color 0.3s ease;
   }
   
-  button:disabled {
+  .bttn:disabled {
     background-color: #a5b4fc;
     cursor: not-allowed;
   }
   
-  button:hover:not(:disabled) {
+  .bttn:hover:not(:disabled) {
     background-color: #4338ca;
   }
   
@@ -68,4 +68,4 @@
     background-color: #fee2e2;
     color: #991b1b;
   }
-   */
+  
