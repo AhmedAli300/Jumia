@@ -2,6 +2,117 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
+export const checkUserInteraction = createAsyncThunk(
+  'auth/checkUserInteraction',
+  async (email, thunkAPI) => {
+    try {
+      const response = await axios.post('http://127.0.0.1:3000/api/v1/users/interaction', { email });
+      console.log('Interaction response:', response.data); 
+      return response.data.message; 
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || 'حدث خطأ في السيرفر');
+    }
+  }
+);
+
+
+// export const confirmVerificationCode = (email, emailVerificationCode) => async (thunkAPI) => {
+//   try {
+//     const response = await axios.post('http://127.0.0.1:3000/api/v1/users/confirmEmailVerificationCode', {
+//       email,
+//       emailVerificationCode: emailVerificationCode,
+//     });
+    
+    
+//   } catch (error) {
+//        return thunkAPI.rejectWithValue(error.response.data.message || 'Signup failed');
+
+//   }
+// }
+
+// export const verifyEmailThunk = createAsyncThunk(
+//   'auth/verifyEmail',
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       // const email = localStorage.getItem('email'); 
+//       // console.log('⛳ email before sending request:', email);
+//       //   const email =  localStorage.getItem('email');
+//       // console.log('⛳ email before sending request:', email);
+//       // if (!email) {
+//       //   return rejectWithValue('البريد الإلكتروني غير موجود.');
+//       // }
+
+//       const response = await axios.post('http://127.0.0.1:3000/api/v1/users/verifyEmail', { email });
+//       console.log("email🚄",response.data)
+//       return response.data.message;
+//     } catch (error) {
+//       return rejectWithValue(error.response?.data?.message || 'Something went wrong');
+//     }
+//   }
+// );
+
+
+export const verifyEmailThunk = createAsyncThunk(
+  'auth/verifyEmail',
+  async (email, { rejectWithValue }) => {
+    try {
+      if (!email) {
+        return rejectWithValue('البريد الإلكتروني غير موجود.');
+      }
+
+      const response = await axios.post('http://127.0.0.1:3000/api/v1/users/verifyEmail', { email });
+      console.log(" Email sent to server:", email);
+      return response.data.message;
+    } catch (error) {
+      console.log(" Error from server:", error.response?.data?.message);
+      return rejectWithValue(error.response?.data?.message || 'Something went wrong');
+    }
+  }
+);
+
+export const confirmVerificationCode = (emailVerificationCode, email) => async (thunkAPI) => {
+  try {
+    // const email = localStorage.getItem('email'); 
+  // const email = state.auth.email;
+    if (!email) {
+      return thunkAPI.rejectWithValue('البريد الإلكتروني غير موجود.');
+    }
+
+    const response = await axios.post('http://127.0.0.1:3000/api/v1/users/confirmEmailVerificationCode', {
+      email:email,  
+      emailVerificationCode: Number(emailVerificationCode),
+    });
+   console.log("code and email", response.data)
+    return response.data.status;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'كود خاطئ');
+  }
+};
+
+// export const signUp = createAsyncThunk('auth/signUp', async (userData, thunkAPI) => {
+//   try {
+//     const response = await axios.post('http://127.0.0.1:3000/api/v1/users/signup', userData);
+//     console.log("signUp data",response.data)
+//     return response.data;
+//   } catch (err) {
+//     return thunkAPI.rejectWithValue(err.response.data.message || 'Signup failed');
+//   }
+// });
+export const signUp = createAsyncThunk('auth/signUp', async (userData, thunkAPI) => {
+  try {
+    const response = await axios.post('http://127.0.0.1:3000/api/v1/users/signup', userData);
+    const { token, user } = response.data;
+    localStorage.setItem('token', token);
+    localStorage.setItem('email', user.email);
+    localStorage.setItem('name', user.name);
+    return response.data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data.message || 'Signup failed');
+  }
+});
+
+
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, thunkAPI) => {
@@ -61,13 +172,13 @@ export const resendResetCode = createAsyncThunk(
   }
 );
 
+
 export const confirmResetCode = createAsyncThunk(
   'auth/confirmResetCode',
-  async ({ passwordResetCode }, thunkAPI) => {
+  async ({ email, passwordResetCode }, thunkAPI) => {
     try {
       const res = await axios.post('http://127.0.0.1:3000/api/v1/users/confirmPasswordResetCode', {
-        email: "ama789238@gmail.com", 
-        
+        email,
         passwordResetCode: Number(passwordResetCode),
       });
       return res.data.status;
@@ -77,15 +188,17 @@ export const confirmResetCode = createAsyncThunk(
   }
 );
 
+
 export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
-  async ({ email, newPassword }, thunkAPI) => {
+  async ({ email, password, passwordConfirm }, thunkAPI) => {
     try {
       const res = await axios.post('http://127.0.0.1:3000/api/v1/users/resetPassword', {
         email,
-        newPassword,
+        password,
+        passwordConfirm,
       });
-      return res.data.message;
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.message || 'فشل إعادة تعيين كلمة المرور');
     }
@@ -115,13 +228,21 @@ const authSlice = createSlice({
     user: null,
     token: null,
     email: '',
+     signupData: {},
+     interactionMessage: '',
     loading: false,
     error: null,
     forgotPasswordMessage: null,
+    emailVerificationStatus: '',
     resendCodeMessage: null,
     resetCodeVerified: false,
     resetPasswordMessage: null,
+    isVerified:false,
+    verifyEmailSuccess: false,
+    verifyEmailMessage: '',
+    name: localStorage.getItem('name') || null,
   },
+
   reducers: {
     setEmail: (state, action) => {
       state.email = action.payload;
@@ -138,6 +259,12 @@ const authSlice = createSlice({
     setUser(state, action) {
       state.user = action.payload;
     },
+     saveStepData: (state, action) => {
+      state.signupData = { ...state.signupData, ...action.payload };
+    },
+    clearSignupData: (state) => {
+      state.signupData = {};
+    },
     logout: (state) => {
       state.user = null;
       state.token = null;
@@ -146,10 +273,69 @@ const authSlice = createSlice({
       localStorage.removeItem('user');
       localStorage.removeItem('email');
     },
+        resetVerifyEmailState: (state) => {
+      state.loading = false;
+      state.verifyEmailSuccess = false;
+      state.verifyEmailMessage = '';
+      state.error = null;
+    },
+
 
   },
   extraReducers: (builder) => {
     builder
+    .addCase(checkUserInteraction.pending, (state) => {
+       state.loading = true;
+        state.error = null;
+      })
+      .addCase(checkUserInteraction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.interactionMessage = action.payload;
+      })
+      .addCase(checkUserInteraction.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+       .addCase(verifyEmailThunk.pending, (state) => {
+        state.loading = true;
+        state.verifyEmailSuccess = false;
+        state.error = null;
+      })
+      .addCase(verifyEmailThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.verifyEmailSuccess = true;
+        state.verifyEmailMessage = action.payload;
+      })
+      .addCase(verifyEmailThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.verifyEmailSuccess = false;
+      })
+
+
+
+
+       .addCase(signUp.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signUp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.data.user;
+        state.token = action.payload.token;
+        state.email = action.payload.data.user.email;
+         localStorage.setItem('token', action.payload.token);
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem("email", action.payload.user.email);
+
+        
+      })
+      .addCase(signUp.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -259,5 +445,8 @@ const authSlice = createSlice({
   },
 });
 
-export const { setEmail, setToken, logout, clearMessages } = authSlice.actions;
+export const { setEmail, setToken, logout, clearMessages ,resetVerifyEmailState,saveStepData, clearSignupData } = authSlice.actions;
 export default authSlice.reducer;
+
+
+

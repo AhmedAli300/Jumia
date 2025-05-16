@@ -124,3 +124,28 @@ body{
   border:#4a4a4a 1px solid!important;
   height: 60px !important;
 }
+
+.fake-placeholder {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  /* pointer-events: none; */
+  font-size: 14px;
+}
+.mxx{
+  margin-right: 500px;
+}
+.yellow{
+  color: #f8982d!important;
+}
+.checkboxinput{
+  width: 14px;
+  height: 14px;
+}
+.disabled-btn {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed;
+    pointer-events: none;
+}

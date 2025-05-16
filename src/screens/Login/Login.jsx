@@ -5,7 +5,7 @@ import './login.css';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setEmail } from '../../store/Slice/authSlice';
+import { setEmail, checkUserInteraction } from '../../store/Slice/authSlice';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
@@ -16,11 +16,27 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const email = data.Email;
-    dispatch(setEmail(email));
-    navigate('/login2');
+    try {
+      const resultAction = await dispatch(checkUserInteraction(email));
+
+      if (checkUserInteraction.fulfilled.match(resultAction)) {
+        const message = resultAction.payload;
+        dispatch(setEmail(email));
+        localStorage.setItem('userEmail', email);
+
+        if (message.includes('signIn')) {
+          navigate('/login2', { state: { email } });
+        } else if (message.includes('signUp')) {
+          navigate('/sign');
+        }
+      }
+    } catch (err) {
+      console.error('خطأ في التفاعل:', err);
+    }
   };
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -79,7 +95,7 @@ const Login = () => {
           اكتب بريدك الإلكتروني أو رقم هاتفك لتسجيل الدخول أو إنشاء حساب على Jumia
         </p>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Box onSubmit={handleSubmit(onSubmit)} component="form">
 
           <Box
             component="form"
@@ -112,7 +128,7 @@ const Login = () => {
           </Box>
 
           <button type="submit" className=" btnn w-100 fontText">استمرار</button>
-        </form>
+        </Box>
 
         <p className="text-muted mt-2 text-dark me-5 fontText" style={{ fontSize: '12px' }}>
           من خلال التسجيل فأنت توافق على <br />

@@ -20,6 +20,10 @@ import Login6 from '../screens/Login/Login6';
 import Products from '../screens/Products/Product';
 import SignUp from '../screens/SignUp/SignUp';
 import Sign2 from '../screens/SignUp/Sign2';
+import Sign1 from '../screens/SignUp/Sign1'
+import Sign3 from '../screens/SignUp/Sign3';
+import Sign4 from '../screens/SignUp/Sign4'
+import UserSetting from '../screens/userSetting/UserSetting'
 // import Products from '../screens/Products/Product';
 
 
@@ -98,12 +102,30 @@ const router = createBrowserRouter([
     element: <Login6 />
   },
   {
-    path: 'signup',
+    path: 'sign',
     element: <SignUp />
+  },
+  {
+    path: 'sign1',
+    element: <Sign1 />
+
   },
   {
     path: 'sign2',
     element: <Sign2 />
+  },
+  {
+    path: 'sign3',
+    element: <Sign3 />
+  },
+  {
+    path: 'sign4',
+    element: <Sign4 />
+  },
+  {
+   path:'user',
+   element:<UserSetting/>
+
   },
 
   {
