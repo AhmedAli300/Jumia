@@ -1,30 +1,155 @@
-import React from "react";
 import "./SelectDeliveryAddress.css";
 import { MdOutlinePermPhoneMsg } from "react-icons/md";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { SiSpringsecurity } from "react-icons/si";
-// import { MdStars } from "react-icons/md";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsTicketPerforated } from "react-icons/bs";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { PaymentForm } from "../PaymentMethod/PaymentMethod";
+// import { PaymentForm } from "../PaymentMethod/PaymentMethod";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import axios from "axios";
 
-const stripePromise = loadStripe("YOUR_PUBLISHABLE_STRIPE_KEY"); 
+
+const citiesWithRegions = {
+  القاهرة: [
+    "مدينة نصر",
+    "مصر الجديدة",
+    "المعادي",
+    "الزيتون",
+    "حلوان",
+    "شبرا",
+    "العباسية",
+    "التجمع",
+    "عين شمس",
+  ],
+  الجيزة: [
+    "الدقي",
+    "الهرم",
+    "فيصل",
+    "العجوزة",
+    "إمبابة",
+    "6 أكتوبر",
+    "الشيخ زايد",
+    "الصف",
+    "البدرشين",
+  ],
+  الإسكندرية: [
+    "سيدي جابر",
+    "العصافرة",
+    "المنتزه",
+    "محرم بك",
+    "العجمي",
+    "سموحة",
+    "باكوس",
+    "المعمورة",
+  ],
+  الدقهلية: ["المنصورة", "طلخا", "ميت غمر", "دكرنس", "السنبلاوين", "بلقاس"],
+  " البحر الأحمر": ["الغردقة", "رأس غارب", "سفاجا", "القصير", "مرسى علم"],
+  البحيرة: [
+    "دمنهور",
+    "كفر الدوار",
+    "إيتاي البارود",
+    "رشيد",
+    "أبو حمص",
+    "المحمودية",
+  ],
+  الفيوم: ["الفيوم", "سنورس", "إطسا", "أبشواي", "يوسف الصديق"],
+  الغربية: ["طنطا", "المحلة الكبرى", "كفر الزيات", "زفتى", "سمنود"],
+  الإسماعيلية: ["الإسماعيلية", "فايد", "القنطرة شرق", "القنطرة غرب"],
+  المنوفية: ["شبين الكوم", "منوف", "سرس الليان", "قويسنا", "أشمون"],
+  المنيا: ["المنيا", "ملوي", "مطاي", "بني مزار", "أبو قرقاص"],
+  القليوبية: ["بنها", "شبرا الخيمة", "طوخ", "قليوب", "الخصوص"],
+  " الوادي الجديد": ["الخارجة", "الداخلة", "الفرافرة", "باريس"],
+  السويس: ["السويس", "عتاقة", "العين السخنة"],
+  أسوان: ["أسوان", "إدفو", "كوم أمبو", "نصر النوبة", "دراو"],
+  أسيوط: ["أسيوط", "ديروط", "منفلوط", "البداري", "أبوتيج"],
+  " بني سويف": ["بني سويف", "الواسطى", "الفشن", "ناصر", "إهناسيا"],
+  بورسعيد: ["بورفؤاد", "حي الشرق", "حي العرب", "حي الضواحي"],
+  دمياط: ["دمياط", "رأس البر", "فارسكور", "الزرقا", "كفر سعد"],
+  الشرقية: ["الزقازيق", "بلبيس", "العاشر من رمضان", "فاقوس", "أبو كبير"],
+  " جنوب سيناء": ["شرم الشيخ", "طور سيناء", "دهب", "نويبع", "سانت كاترين"],
+  " كفر الشيخ": ["كفر الشيخ", "دسوق", "بيلا", "قلين", "الحامول"],
+  مطروح: ["مرسى مطروح", "النجيلة", "سيدي براني", "السلوم", "العلمين"],
+  الأقصر: ["الأقصر", "الكرنك", "الزينية", "أرمنت", "إسنا"],
+  قنا: ["قنا", "نجع حمادي", "دشنا", "قفط", "قوص"],
+  " شمال سيناء": ["العريش", "الشيخ زويد", "رفح", "بئر العبد", "الحسنة"],
+  سوهاج: ["سوهاج", "أخميم", "المراغة", "طما", "طهطا"],
+};
+
+const cities = Object.keys(citiesWithRegions).map((city) => ({
+  value: city,
+  label: city,
+}));
+
+const stripePromise = loadStripe("YOUR_PUBLISHABLE_STRIPE_KEY");
 
 const SelectDeliveryAddress = () => {
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
+
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [details, setDetails] = useState("");
+
+  const regions = citiesWithRegions[selectedCity] || [];
+
+  const handleCityChange = (event) => {
+    const city = event.target.value;
+    setSelectedCity(city);
+    setSelectedRegion(""); // إعادة ضبط المنطقة عند تغيير المدينة
+  };
+
+  const handleRegionChange = (event) => {
+    setSelectedRegion(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "/api/orders", // أو المسار حسب الباك إند بتاعك
+        {
+          orderItems: [], // حسب السلة أو المنتجات اللي اختارها المستخدم
+          shippingAddress: {
+            fullName,
+            phone,
+            address,
+            selectedCity,
+            selectedRegion,
+            details,
+          },
+          paymentMethod: "COD", // مثلاً
+          shippingMethod: "HomeDelivery", // مثلاً
+          shippingPrice: 50,
+          totalPrice: 250, // دا لازم تحسبيه بناءً على المنتجات
+        },
+        {
+          // headers: {
+          //   Authorization: `Bearer ${userToken}`, // لو فيه تسجيل دخول
+          // },
+        }
+      );
+
+      console.log("Order created:", response.data);
+      // ممكن تعملي redirect أو رسالة نجاح
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
+  };
+
+  const cartSize = useSelector((state) => state.cart.size);
+  const cart = useSelector((state) => state.cart.cart);
   return (
     <div className="order">
       <div
         className="title"
         style={{ height: "90px", backgroundColor: "white", width: "100%" }}
       >
-
         <div style={{ fontSize: "80%" }}>اختيار عنوان تسليم</div>
 
         <div
@@ -116,39 +241,30 @@ const SelectDeliveryAddress = () => {
               marginRight: "20px",
             }}
           >
-            تعديل العنوان
+            إدخال العنوان
           </p>
-
+          {/* الاسم */}
           <div>
             <TextField
               id="outlined-textarea"
-              label="الاسم الاول"
-              placeholder="ادخل الاسم الاول"
+              label="الاسم كامل"
+              placeholder="ادخل الاسم كامل"
               multiline
               style={{
                 direction: "rtl",
-                marginTop: "20px",
-                marginLeft: "20px",
-                marginRight: "20px",
-                width: "40%",
+                marginTop: "2%",
+                marginRight: "1%",
+                width: "98%",
               }}
-            />
-            <TextField
-              label="الاسم الأخير"
-              placeholder="ادخل الاسم الأخير"
-              multiline
-              style={{
-                direction: "rtl",
-                marginTop: "20px",
-                marginLeft: "20px",
-                width: "40%",
-              }}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
           </div>
 
+          {/* الرقم */}
           <div style={{ display: "flex", alignItems: "center" }}>
             <div
-              style={{ marginTop: "20px", marginRight: "4%", marginLeft: "2%" }}
+              style={{ marginTop: "2%", marginRight: "2%", marginLeft: "2%" }}
             >
               <div style={{ color: "gray" }}>الكود</div>
               <div>20+</div>
@@ -160,29 +276,17 @@ const SelectDeliveryAddress = () => {
               multiline
               style={{
                 direction: "rtl",
-                marginTop: "20px",
-                marginLeft: "20px",
-                marginRight: "20px",
-                width: "30%",
+                marginTop: "2%",
+                marginLeft: "2%",
+                marginRight: "2%",
+                width: "40%",
               }}
-            />
-            <div style={{ marginTop: "20px", marginLeft: "3%" }}>
-              <div style={{ color: "gray" }}>رمز الهاتف</div>
-              <div>20+</div>
-            </div>
-            <TextField
-              label="رقم هاتف اضافي"
-              placeholder="ادخل رقم هاتفك الاضافي"
-              multiline
-              style={{
-                direction: "rtl",
-                marginTop: "20px",
-                marginLeft: "20px",
-                width: "30%",
-              }}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
 
+          {/* العنوان */}
           <div>
             <TextField
               id="outlined-textarea"
@@ -191,14 +295,60 @@ const SelectDeliveryAddress = () => {
               multiline
               style={{
                 direction: "rtl",
-                marginTop: "20px",
-                marginLeft: "20px",
-                marginRight: "20px",
-                width: "82.5%",
+                marginTop: "2%",
+                marginRight: "1%",
+                marginBottom: "2%",
+                width: "98%",
               }}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
 
+          {/* المدينة والمنطقة */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "1rem",
+              direction: "rtl",
+            }}
+          >
+            <TextField
+              className="m-2 w-50"
+              select
+              label="المدينة"
+              value={selectedCity}
+              onChange={handleCityChange}
+            >
+              {cities.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <TextField
+              className="m-2 w-50"
+              select
+              label="المنطقة"
+              value={selectedRegion}
+              onChange={handleRegionChange}
+              disabled={regions.length === 0}
+            >
+              {regions.length === 0 ? (
+                <MenuItem value="">لا توجد مناطق</MenuItem>
+              ) : (
+                regions.map((region) => (
+                  <MenuItem key={region} value={region}>
+                    {region}
+                  </MenuItem>
+                ))
+              )}
+            </TextField>
+          </div>
+
+          {/* تفاصيل اكثر حول العنوان */}
           <div>
             <TextField
               id="outlined-textarea"
@@ -207,41 +357,15 @@ const SelectDeliveryAddress = () => {
               multiline
               style={{
                 direction: "rtl",
-                marginTop: "20px",
-                marginLeft: "20px",
-                marginRight: "20px",
-                width: "82.5%",
+                marginTop: "2%",
+                marginRight: "1%",
+                marginBottom: "2%",
+                width: "98%",
               }}
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
             />
           </div>
-
-          <FormControl
-            sx={{ m: 1, minWidth: 120 }}
-            style={{ marginRight: "20px", marginTop: "20px", width: "40%" }}
-          >
-            <Select displayEmpty inputProps={{ "aria-label": "Without label" }}>
-              <MenuItem value="">
-                <em>القاهرة</em>
-              </MenuItem>
-              <MenuItem value="الاقصر">الاقصر</MenuItem>
-              <MenuItem value="الجيزة">الجيزة</MenuItem>
-              <MenuItem value="اسوان">اسوان</MenuItem>
-            </Select>
-          </FormControl>
-
-          <FormControl
-            sx={{ m: 1, minWidth: 120 }}
-            style={{ marginRight: "20px", marginTop: "20px", width: "40%" }}
-          >
-            <Select displayEmpty inputProps={{ "aria-label": "Without label" }}>
-              <MenuItem value="">
-                <em>القاهرة</em>
-              </MenuItem>
-              <MenuItem value="الاقصر">الاقصر</MenuItem>
-              <MenuItem value="الجيزة">الجيزة</MenuItem>
-              <MenuItem value="اسوان">اسوان</MenuItem>
-            </Select>
-          </FormControl>
 
           <hr />
 
@@ -252,7 +376,11 @@ const SelectDeliveryAddress = () => {
             <Button variant="text" style={{ color: "orange" }}>
               إلغاء
             </Button>
-            <Button variant="contained" style={{ backgroundColor: "orange" }}>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: "orange" }}
+              onClick={handleSubmit}
+            >
               حفظ
             </Button>
           </div>
@@ -272,8 +400,8 @@ const SelectDeliveryAddress = () => {
             className="mx-2"
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            <p>عدد المنتجات(1)</p>
-            <p>230.00 جنيه</p>
+            <p>عدد المنتجات({cartSize})</p>
+            <p>({cart?.cartTotal?.toFixed(2)} جنيه)</p>
           </div>
           <div
             className="mx-2"
@@ -288,7 +416,7 @@ const SelectDeliveryAddress = () => {
             style={{ display: "flex", justifyContent: "space-between" }}
           >
             <p>الاجمالي</p>
-            <p>250.00 جنيه</p>
+            <p>({(+cart?.cartTotal?.toFixed(2) + 20.0).toFixed(2)} جنيه)</p>
           </div>
           <hr className="m-0" />
           <p className="m-1" style={{ fontSize: "13px" }}>
@@ -311,25 +439,14 @@ const SelectDeliveryAddress = () => {
         </div>
       </div>
 
-      {/* <div
-        className="rounded"
-        style={{ backgroundColor: "white", width: "60%", marginRight: "10%" }}
-      >
-        <h6 style={{ margin: "15px", color: "gray", padding: "1.5%" }}>
-          2.تفاصيل التوصيل
-        </h6>
-      </div> */}
-
       <div
         className="rounded"
         style={{ backgroundColor: "white", width: "60%", marginRight: "10%" }}
       >
         <h6 style={{ margin: "15px", color: "gray", padding: "1.5%" }}>
-          3.طريقة الدفع
+          2.طريقة الدفع
         </h6>
-        <Elements stripe={stripePromise}>
-          <PaymentForm />
-        </Elements>
+        <Elements stripe={stripePromise}>{/* <PaymentForm /> */}</Elements>
       </div>
 
       <a href="/products" style={{ marginRight: "10%" }}>
