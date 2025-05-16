@@ -18,30 +18,7 @@ const Home = () => {
   }, []);
   console.log(categories);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://127.0.0.1:3000/api/v1/categories")
-  //     .then((res) => setData(res.data.data))
-  //     .catch((err) => {
-
-  //     });
-  // }, []);
-
-  // const [isVisible, setIsVisible] = useState(false);
-  // const [data, setData] = useState({});
-
-  // const handleCategorHover = () => {
-  //   setIsVisible(true);
-
-  //   console.log(
-  //     // data?.categories?.find((cat) => cat.name == "الازياء").subcategories
-  //   );
-  //   // data?.categories?.find((cat) => cat.name == "الازياء").subcategories;
-
-  //   console.log(data?.categories?.find((cat) => cat.name == "موبايلات وتابلت").subcategories);
-
-  //   console.log(data);
-  // };
+ 
   return (
     <>
       <section className="hero-section container mx-auto row p-3">
