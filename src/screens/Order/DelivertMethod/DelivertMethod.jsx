@@ -41,10 +41,10 @@ const DeliveryMethod = () => {
 
   const {
     shippingAddress,
-    paymentMethod,
+    // paymentMethod,
     totalPrice,
-    shippingMethod,
-    orderItems,
+    // shippingMethod,
+    // orderItems,
   } = order;
 
   return (
