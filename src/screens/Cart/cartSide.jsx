@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const CartSide = ({ cart }) => {
+    const navigate = useNavigate();
   return (
     <div className="col-lg-3">
       <div className="cart-side p-3">
@@ -25,6 +28,7 @@ const CartSide = ({ cart }) => {
 
         <hr className="text-muted my-2" />
         <button
+          onClick={() => navigate('/order')}
           className="btn w-100 text-light mt-0 fontText"
           style={{
             backgroundColor: "#f68b1e",
@@ -32,6 +36,7 @@ const CartSide = ({ cart }) => {
             padding: "10px",
             fontSize: "16px"
           }}
+          
         >
           الإجمالي ({cart?.cartTotal?.toFixed(2)} جنيه)
         </button>

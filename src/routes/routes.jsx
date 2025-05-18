@@ -24,6 +24,9 @@ import Sign1 from '../screens/SignUp/Sign1'
 import Sign3 from '../screens/SignUp/Sign3';
 import Sign4 from '../screens/SignUp/Sign4'
 import UserSetting from '../screens/userSetting/UserSetting'
+import SelectDeliveryAddress from '../screens/Order/SelectDeliveryAddress/SelectDeliveryAddress';
+import DelivertMethod from '../screens/Order/DelivertMethod/DelivertMethod';
+
 // import Products from '../screens/Products/Product';
 
 
@@ -63,6 +66,17 @@ const router = createBrowserRouter([
         element: <EmptyCart />,
         errorElement: <NotFound />
       },
+      {
+        path: 'order',
+        element: <SelectDeliveryAddress/>,
+        errorElement: <NotFound />
+      },
+      {
+        path: 'delivery',
+        element: <DelivertMethod/>,
+        errorElement: <NotFound />
+      },
+      
 
       // {
       //   path: 'favourte',
