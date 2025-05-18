@@ -7,16 +7,24 @@ import CartSide from './cartSide';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MdErrorOutline } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const { cart, loading } = useSelector((state) => state.cart);
+    const user = useSelector((state) => state.auth.user);
     const [loadingItemId, setLoadingItemId] = useState(null);
     const cartSize = useSelector(state => state.cart.size);
 
     useEffect(() => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
         dispatch(fetchCart());
-    }, [dispatch]);
+    }, [dispatch, user, navigate]);
 
     if (loading) return <div>Loading...</div>;
     if (!cart?.items?.length) return <CartEmpty />;
@@ -25,28 +33,7 @@ const CartItem = () => {
         setLoadingItemId(productId);
         try {
             await dispatch(updateItem({ productId, quantity })).unwrap();
-            // dispatch(fetchCart());
             toast.success(type === 'increase' ? 'تم اضافه المنتج بنجاح ' : '  تم تحديث عدد النتجات بنجاح');
-            // toast.success(
-            //     type === 'increase' ? 'تم اضافه المنتج بنجاح' : 'تم تحديث عدد المنتجات بنجاح',
-            //     {
-            //         style: {
-            //             backgroundColor: '#6dbd28',
-            //             color: '#fff',
-            //             width: "1600px",
-            //             textAlign: "center",
-            //             PaddingRight: "-2000px",
-            //             height: "20px",
-            //             fontSize: "20px",
-            //             padding: "0 0 0 20px",
-
-            //         },
-            //         icon: '+', 
-            //         position: 'top-center',
-            //         autoClose: 3000,
-            //     }
-            // );
-
         } catch (error) {
             toast.error('حدث خطأ أثناء تحديث الكمية ');
         } finally {
@@ -78,9 +65,6 @@ const CartItem = () => {
             <div className="row g-4">
                 <div className="col-lg-9">
                     <div className="cart-box p-3">
-                        {/* <h5 className="fw-bold mb-4">
-                            سلة التسوق <span>({cart.items.length})</span>
-                        </h5> */}
                         <h5 className="fw-bold mb-4">
                             سلة التسوق <span>({cartSize})</span>
                         </h5>
@@ -163,7 +147,6 @@ const CartItem = () => {
                                                 onClick={() => {
                                                     if (item.quantity > 1) {
                                                         handleUpdate(item.product._id, item.quantity - 1, 'decrease');
-
                                                     } else {
                                                         handleRemove(item.product._id);
                                                     }
