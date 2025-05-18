@@ -12,8 +12,8 @@ import { loadStripe } from "@stripe/stripe-js";
 // import { PaymentForm } from "../PaymentMethod/PaymentMethod";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import axios from "axios";
-
+import orderService from "../../../services/orderService";
+import { useNavigate } from "react-router-dom";
 
 const citiesWithRegions = {
   القاهرة: [
@@ -86,18 +86,25 @@ const cities = Object.keys(citiesWithRegions).map((city) => ({
   label: city,
 }));
 
-const stripePromise = loadStripe("YOUR_PUBLISHABLE_STRIPE_KEY");
+const stripePromise = loadStripe(
+  "pk_test_51Qv3slLmXnIE3kFCGyB1k9A8MzfYvQfMBsCzE6bExrBiOBuARluFIOtKYbXgiHpcmibaoqWbKRD5iyzQdNZYZxx200lvUFnyGa"
+);
 
 const SelectDeliveryAddress = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
-
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [details, setDetails] = useState("");
-
+  // const paymentMethod = useState("COD"); // مثلاً
+  // const shippingMethod = useState("HomeDelivery"); // مثلاً
+  const cartSize = useSelector((state) => state.cart.size);
+  const cart = useSelector((state) => state.cart.cart);
+  const shippingPrice = 20;
+  const totalPrice = cart?.cartTotal + shippingPrice;
   const regions = citiesWithRegions[selectedCity] || [];
+  const navigate = useNavigate();
 
   const handleCityChange = (event) => {
     const city = event.target.value;
@@ -110,40 +117,48 @@ const SelectDeliveryAddress = () => {
   };
 
   const handleSubmit = async () => {
-    try {
-      const response = await axios.post(
-        "/api/orders", // أو المسار حسب الباك إند بتاعك
-        {
-          orderItems: [], // حسب السلة أو المنتجات اللي اختارها المستخدم
-          shippingAddress: {
-            fullName,
-            phone,
-            address,
-            selectedCity,
-            selectedRegion,
-            details,
-          },
-          paymentMethod: "COD", // مثلاً
-          shippingMethod: "HomeDelivery", // مثلاً
-          shippingPrice: 50,
-          totalPrice: 250, // دا لازم تحسبيه بناءً على المنتجات
-        },
-        {
-          // headers: {
-          //   Authorization: `Bearer ${userToken}`, // لو فيه تسجيل دخول
-          // },
-        }
-      );
+    const orderData = {
+      orderItems: cart.items.map((item) => ({
+        product: item.product._id,
+        quantity: item.quantity,
+        price: item.product.price,
+      })),
+      shippingAddress: {
+        fullName,
+        phone,
+        address,
+        city: selectedCity,
+        region: selectedRegion,
+        additionalInfo: details,
+      },
+      paymentMethod: "COD",
+      shippingMethod: "HomeDelivery",
+      shippingPrice,
+      totalPrice,
+    };
 
-      console.log("Order created:", response.data);
-      // ممكن تعملي redirect أو رسالة نجاح
-    } catch (error) {
-      console.error("Error creating order:", error);
+    try {
+      const res = await orderService.createOrder(orderData);
+      console.log("رد السيرفر:", res.data);
+
+      const orderId = res?.data?.order?._id;
+      if (orderId) {
+        const order = res.data.order;
+        localStorage.setItem("latestOrder", JSON.stringify(order));
+        navigate("/delivery", { state: { order } });
+        console.log("Created order:", res.data.order);
+      } else {
+        console.error("الرد لا يحتوي على order:", res.data);
+        alert("حدث خطأ أثناء إنشاء الطلب");
+      }
+    } catch (err) {
+      console.error("فشل في إنشاء الطلب:", err.response?.data || err.message);
+      console.log(cart.items);
+
+      alert("حدث خطأ أثناء إنشاء الطلب");
     }
   };
 
-  const cartSize = useSelector((state) => state.cart.size);
-  const cart = useSelector((state) => state.cart.cart);
   return (
     <div className="order">
       <div
@@ -408,7 +423,7 @@ const SelectDeliveryAddress = () => {
             style={{ display: "flex", justifyContent: "space-between" }}
           >
             <p>التوصيل</p>
-            <p>20.00 جنيه</p>
+            <p>{shippingPrice.toFixed(2)} جنيه</p>
           </div>
           <hr className="m-0" />
           <div
@@ -416,7 +431,7 @@ const SelectDeliveryAddress = () => {
             style={{ display: "flex", justifyContent: "space-between" }}
           >
             <p>الاجمالي</p>
-            <p>({(+cart?.cartTotal?.toFixed(2) + 20.0).toFixed(2)} جنيه)</p>
+            <p>({totalPrice.toFixed(2)} جنيه)</p>
           </div>
           <hr className="m-0" />
           <p className="m-1" style={{ fontSize: "13px" }}>
@@ -444,7 +459,16 @@ const SelectDeliveryAddress = () => {
         style={{ backgroundColor: "white", width: "60%", marginRight: "10%" }}
       >
         <h6 style={{ margin: "15px", color: "gray", padding: "1.5%" }}>
-          2.طريقة الدفع
+          2.طريقة التوصيل
+        </h6>
+      </div>
+
+      <div
+        className="rounded"
+        style={{ backgroundColor: "white", width: "60%", marginRight: "10%" }}
+      >
+        <h6 style={{ margin: "15px", color: "gray", padding: "1.5%" }}>
+          3.طريقة الدفع
         </h6>
         <Elements stripe={stripePromise}>{/* <PaymentForm /> */}</Elements>
       </div>

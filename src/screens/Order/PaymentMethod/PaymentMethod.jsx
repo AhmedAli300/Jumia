@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import "./PaymentMethod.css";
+import orderService from "../../../services/orderService";
 
 export const PaymentForm = () => {
   const stripe = useStripe();
@@ -22,11 +23,7 @@ export const PaymentForm = () => {
           paymentMethod: "CreditCard",
           totalPrice: 2000,
         },
-        {
-          headers: {
-            Authorization: `Bearer YOUR_USER_TOKEN`,
-          },
-        }
+        orderService.authHeader()
       );
 
       const result = await stripe.confirmCardPayment(data.clientSecret, {

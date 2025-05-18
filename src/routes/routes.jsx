@@ -21,6 +21,7 @@ import Products from '../screens/Products/Product';
 import SignUp from '../screens/SignUp/SignUp';
 import Sign2 from '../screens/SignUp/Sign2';
 import SelectDeliveryAddress from '../screens/Order/SelectDeliveryAddress/SelectDeliveryAddress';
+import DelivertMethod from '../screens/Order/DelivertMethod/DelivertMethod';
 // import Products from '../screens/Products/Product';
 
 
@@ -64,7 +65,13 @@ const router = createBrowserRouter([
         path: 'order',
         element: <SelectDeliveryAddress/>,
         errorElement: <NotFound />
-      }
+      },
+      {
+        path: 'delivery',
+        element: <DelivertMethod/>,
+        errorElement: <NotFound />
+      },
+      
 
       // {
       //   path: 'favourte',
