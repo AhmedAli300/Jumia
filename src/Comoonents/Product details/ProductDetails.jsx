@@ -518,7 +518,18 @@ const ProductDetails = () => {
               dir="ltr"
             >
               <option hidden>الجيزه</option>
-              {/* باقي الاختيارات هنا */}
+              <option >القاهرة</option>
+              <option >6 اكتوبر </option>
+              <option >الشرقيه</option>
+              <option >المنصوره</option>
+              <option >الجيزه</option>
+              <option >الجيزه</option>
+              <option >الجيزه</option>
+              <option >الجيزه</option>
+              <option >الجيزه</option>
+              <option >الجيزه</option>
+              <option >الجيزه</option>
+              
             </select>
 
             <select
