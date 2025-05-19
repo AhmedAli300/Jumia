@@ -32,8 +32,7 @@ import Sign3 from "../screens/SignUp/Sign3";
 import Sign4 from "../screens/SignUp/Sign4";
 import UserSetting from "../screens/UserSetting/UserSetting";
 // import Products from '../screens/Products/Product';
-import Sign4 from './../screens/SignUp/Sign4';
-import Sign3 from './../screens/SignUp/Sign3';
+
 
 
 const router = createBrowserRouter([
