@@ -14,26 +14,18 @@ import { SiSpringsecurity } from "react-icons/si";
 import { CiDeliveryTruck } from "react-icons/ci";
 import "./ConfirmOrder.css";
 import { GoChevronLeft } from "react-icons/go";
-
 export const PaymentForm = () => {
-  // const stripe = useStripe();
-  // const elements = useElements();
-  // const [loading, setLoading] = useState(false);
-  // const [message, setMessage] = useState("");
   const location = useLocation();
-  const navigate = useNavigate();
   const [order, setOrder] = useState(null);
   const shippingPrice = 20;
-  const {paymentMethod } = location.state || {};
-
-  console.log("طريقة الدفع:", paymentMethod); // للتأكد أنها وصلت
+  const { paymentMethod } = location.state || {};
+  const navigate = useNavigate();
+  console.log("طريقة الدفع:", paymentMethod);
   const cartSize = useSelector((state) => state.cart.size);
   const cart = useSelector((state) => state.cart.cart);
-  // جلب الطلب من state أو من localStorage
   useEffect(() => {
     const stateOrder = location.state?.order;
     const storedOrder = localStorage.getItem("latestOrder");
-
     if (stateOrder) {
       setOrder(stateOrder);
     } else if (storedOrder) {
@@ -52,12 +44,19 @@ export const PaymentForm = () => {
 
   const {
     shippingAddress,
-    // paymentMethod,
     totalPrice,
-    // shippingMethod,
-    // orderItems,
   } = order;
-
+  const handleConfirm = () => {
+    if (paymentMethod === "cash") {
+      navigate("/orderdone", {
+        state: { order, cart, paymentMethod },
+      });
+    } else if (paymentMethod === "card") {
+      navigate("/payment2", {
+        state: { order, cart, paymentMethod },
+      });
+    }
+  };
   return (
     <div className="order">
       {/* Header */}
@@ -334,7 +333,7 @@ export const PaymentForm = () => {
             ستتمكن من إضافة قسيمة الشراء عند اختيار طريقة الدفع الخاصة بك.
           </p>
           <Button
-            onClick={() => navigate("/payment2",{state: { order,cart, paymentMethod }})}
+            onClick={handleConfirm}
             variant="contained"
             style={{
               width: "90%",
