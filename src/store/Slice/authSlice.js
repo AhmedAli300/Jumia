@@ -16,43 +16,6 @@ export const checkUserInteraction = createAsyncThunk(
   }
 );
 
-
-// export const confirmVerificationCode = (email, emailVerificationCode) => async (thunkAPI) => {
-//   try {
-//     const response = await axios.post('http://127.0.0.1:3000/api/v1/users/confirmEmailVerificationCode', {
-//       email,
-//       emailVerificationCode: emailVerificationCode,
-//     });
-    
-    
-//   } catch (error) {
-//        return thunkAPI.rejectWithValue(error.response.data.message || 'Signup failed');
-
-//   }
-// }
-
-// export const verifyEmailThunk = createAsyncThunk(
-//   'auth/verifyEmail',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       // const email = localStorage.getItem('email'); 
-//       // console.log('⛳ email before sending request:', email);
-//       //   const email =  localStorage.getItem('email');
-//       // console.log('⛳ email before sending request:', email);
-//       // if (!email) {
-//       //   return rejectWithValue('البريد الإلكتروني غير موجود.');
-//       // }
-
-//       const response = await axios.post('http://127.0.0.1:3000/api/v1/users/verifyEmail', { email });
-//       console.log("email🚄",response.data)
-//       return response.data.message;
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data?.message || 'Something went wrong');
-//     }
-//   }
-// );
-
-
 export const verifyEmailThunk = createAsyncThunk(
   'auth/verifyEmail',
   async (email, { rejectWithValue }) => {
