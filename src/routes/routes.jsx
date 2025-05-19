@@ -32,6 +32,8 @@ import Sign3 from "../screens/SignUp/Sign3";
 import Sign4 from "../screens/SignUp/Sign4";
 import UserSetting from "../screens/UserSetting/UserSetting";
 import OrderDone from "../screens/Order/OrderDone/OrderDone";
+import Form from '../screens/userSetting/FormSetting'
+import  Acount from '../screens/userSetting/acount'
 // import Products from '../screens/Products/Product';
 
 
@@ -169,7 +171,14 @@ const router = createBrowserRouter([
     path: "Wishlist",
     element: <Wishlist />,
   },
-
+  {
+    path:'form',
+    element:<Form/>
+  },
+  {
+    path:'acount',
+    element:<Acount/>
+  },
   {
     path: "*",
     element: <NotFound />,
