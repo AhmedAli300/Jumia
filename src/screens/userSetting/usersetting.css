@@ -1,0 +1,65 @@
+.svgg{
+    color: #264996!important;
+    font-size: 18px;
+}
+.mmsvg{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.textWarn{
+  color: #f8982d!important;
+}
+.pen{
+    margin-right:270px!important;
+}
+
+.form-control.custom-input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+}
+
+.form-control.custom-input:focus {
+  border-color: #f68b1e; 
+  outline: none;
+  box-shadow: none;
+}
+
+.inputnum{
+    padding: 1px 0 !important;
+    height: 50px;
+}
+
+.ttter{
+    display: flex;
+    align-items: flex-start;
+    direction: ltr;
+}
+.marleft{
+  margin-left: 15px;
+}
+.cardcard{
+    background-color: rgba(255, 255, 255, 0.925)!important;
+}
+
+.card-body ul li {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.card-body ul li:hover {
+  background-color: #f0f0f0;
+}
+.cardcard {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+  background-color: #fff;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+.cardcard {
+  border: none !important;
+}
