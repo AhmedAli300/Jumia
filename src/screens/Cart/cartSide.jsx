@@ -28,7 +28,7 @@ const CartSide = ({ cart }) => {
 
         <hr className="text-muted my-2" />
         <button
-          onClick={() => navigate('/order')}
+          onClick={() => navigate('/order',{state: { cart }})}
           className="btn w-100 text-light mt-0 fontText"
           style={{
             backgroundColor: "#f68b1e",

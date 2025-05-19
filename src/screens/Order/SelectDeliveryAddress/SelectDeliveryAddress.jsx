@@ -7,13 +7,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsTicketPerforated } from "react-icons/bs";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-// import { PaymentForm } from "../PaymentMethod/PaymentMethod";
+// import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import orderService from "../../../services/orderService";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const citiesWithRegions = {
   القاهرة: [
@@ -86,9 +86,9 @@ const cities = Object.keys(citiesWithRegions).map((city) => ({
   label: city,
 }));
 
-const stripePromise = loadStripe(
-  "pk_test_51Qv3slLmXnIE3kFCGyB1k9A8MzfYvQfMBsCzE6bExrBiOBuARluFIOtKYbXgiHpcmibaoqWbKRD5iyzQdNZYZxx200lvUFnyGa"
-);
+// const stripePromise = loadStripe(
+//   "pk_test_51Qv3slLmXnIE3kFCGyB1k9A8MzfYvQfMBsCzE6bExrBiOBuARluFIOtKYbXgiHpcmibaoqWbKRD5iyzQdNZYZxx200lvUFnyGa"
+// );
 
 const SelectDeliveryAddress = () => {
   const [selectedCity, setSelectedCity] = useState("");
@@ -97,8 +97,6 @@ const SelectDeliveryAddress = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [details, setDetails] = useState("");
-  // const paymentMethod = useState("COD"); // مثلاً
-  // const shippingMethod = useState("HomeDelivery"); // مثلاً
   const cartSize = useSelector((state) => state.cart.size);
   const cart = useSelector((state) => state.cart.cart);
   const shippingPrice = 20;
@@ -117,6 +115,10 @@ const SelectDeliveryAddress = () => {
   };
 
   const handleSubmit = async () => {
+    if (!fullName || !phone || !address || !selectedCity || !selectedRegion) {
+      alert("من فضلك اكمل كل البيانات المطلوبة");
+      return;
+    }
     const orderData = {
       orderItems: cart.items.map((item) => ({
         product: item.product._id,
@@ -145,7 +147,8 @@ const SelectDeliveryAddress = () => {
       if (orderId) {
         const order = res.data.order;
         localStorage.setItem("latestOrder", JSON.stringify(order));
-        navigate("/delivery", { state: { order } });
+        navigate("/delivery", { state: { order, cart } });
+        console.log(cart.items);
         console.log("Created order:", res.data.order);
       } else {
         console.error("الرد لا يحتوي على order:", res.data);
@@ -158,6 +161,33 @@ const SelectDeliveryAddress = () => {
       alert("حدث خطأ أثناء إنشاء الطلب");
     }
   };
+
+  useEffect(() => {
+    const local = localStorage.getItem("userAddress");
+    if (local) {
+      const parsed = JSON.parse(local);
+      setFullName(parsed.fullName || "");
+      setPhone(parsed.phone || "");
+      setAddress(parsed.address || "");
+      setSelectedCity(parsed.city || "");
+      setSelectedRegion(parsed.region || "");
+      setDetails(parsed.additionalInfo || "");
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "userAddress",
+      JSON.stringify({
+        fullName,
+        phone,
+        address,
+        city: selectedCity,
+        region: selectedRegion,
+        additionalInfo: details,
+      })
+    );
+  }, [fullName, phone, address, selectedCity, selectedRegion, details]);
 
   return (
     <div className="order">
@@ -470,7 +500,7 @@ const SelectDeliveryAddress = () => {
         <h6 style={{ margin: "15px", color: "gray", padding: "1.5%" }}>
           3.طريقة الدفع
         </h6>
-        <Elements stripe={stripePromise}>{/* <PaymentForm /> */}</Elements>
+        {/* <Elements stripe={stripePromise}><PaymentForm /></Elements> */}
       </div>
 
       <a href="/products" style={{ marginRight: "10%" }}>
