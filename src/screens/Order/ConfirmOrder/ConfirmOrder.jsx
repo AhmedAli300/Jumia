@@ -1,24 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+// import axios from "axios";
+// import orderService from "../../../services/orderService";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Button } from "@mui/material";
+import { BsTicketPerforated } from "react-icons/bs";
 import { MdOutlinePermPhoneMsg } from "react-icons/md";
 import { RiArrowGoBackLine } from "react-icons/ri";
-import { SiSpringsecurity } from "react-icons/si";
 import { IoIosArrowForward } from "react-icons/io";
-import { BsTicketPerforated } from "react-icons/bs";
-import Button from "@mui/material/Button";
-import "./DelivertMethod.css";
+import { SiSpringsecurity } from "react-icons/si";
 import { CiDeliveryTruck } from "react-icons/ci";
+import "./ConfirmOrder.css";
 import { GoChevronLeft } from "react-icons/go";
-const DeliveryMethod = () => {
+
+export const PaymentForm = () => {
+  // const stripe = useStripe();
+  // const elements = useElements();
+  // const [loading, setLoading] = useState(false);
+  // const [message, setMessage] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const [order, setOrder] = useState(null);
   const shippingPrice = 20;
+  const {paymentMethod } = location.state || {};
 
+  console.log("طريقة الدفع:", paymentMethod); // للتأكد أنها وصلت
   const cartSize = useSelector((state) => state.cart.size);
   const cart = useSelector((state) => state.cart.cart);
-
   // جلب الطلب من state أو من localStorage
   useEffect(() => {
     const stateOrder = location.state?.order;
@@ -48,16 +58,6 @@ const DeliveryMethod = () => {
     // orderItems,
   } = order;
 
-  // const firstImageUrl = cart?.items?.[0]?.product?.images?.[0]?.secure_url;
-  // console.log("First image URL:", firstImageUrl);
-  const handleSubmit = () => {
-    // هنا يمكنك إضافة منطق حفظ الطلب أو أي إجراء آخر تريده
-    console.log("تم حفظ الطلب");
-    navigate("/payment", {
-      state: { order, cart },
-    });
-  };
-
   return (
     <div className="order">
       {/* Header */}
@@ -65,7 +65,7 @@ const DeliveryMethod = () => {
         className="title"
         style={{ height: "90px", backgroundColor: "white", width: "100%" }}
       >
-        <div style={{ fontSize: "80%" }}>اختيار طريقة التوصيل</div>
+        <div style={{ fontSize: "80%" }}>إجراء الطلبية</div>
         <div
           style={{ display: "flex", alignItems: "center", marginLeft: "20px" }}
         >
@@ -259,22 +259,14 @@ const DeliveryMethod = () => {
               </div>
             </div>
 
-            <div className="d-flex flex-row justify-content-between align-items-center m-2">
+            <div className="d-flex flex-row justify-content-center align-items-center m-2">
               <Button onClick={() => navigate("/cart")} color="primary">
                 تغيير سلة التسوق
-              </Button>
-
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "orange" }}
-                onClick={handleSubmit}
-                className="m-2"
-              >
-                تأكيد تفاصيل الطلب
               </Button>
             </div>
           </div>
 
+          {/* Payment Section */}
           <div
             className="rounded"
             style={{
@@ -283,22 +275,34 @@ const DeliveryMethod = () => {
               marginRight: "10%",
             }}
           >
-            <h6 style={{ margin: "15px", color: "gray", padding: "1.5%" }}>
+            <h6 style={{ margin: "15px" }} className="pt-3">
               3.طريقة الدفع
             </h6>
+            <hr />
+            {paymentMethod === "cash" && (
+              <div className="d-flex flex-row justify-content-between align-items-center m-2">
+                <p className="m-2 fs-3">الدفع عند الاستلام</p>
+                <SiSpringsecurity size={"3%"} color="orange" className="ms-2" />
+              </div>
+            )}
+            {paymentMethod === "card" && (
+              <div className="d-flex flex-row justify-content-between align-items-center m-2">
+                <p className="m-2 fs-3">بطاقة ائتمانية</p>
+                <SiSpringsecurity size={"3%"} color="orange" className="ms-2" />
+              </div>
+            )}
           </div>
 
           <a href="/products" style={{ marginRight: "10%" }}>
             <IoIosArrowForward />
             العودة الى المشتريات
           </a>
-
         </div>
 
         {/* Order Summary */}
         <div
           className="rounded m-4"
-          style={{ backgroundColor: "white", width: "20%", direction: "rtl"}}
+          style={{ backgroundColor: "white", width: "20%", direction: "rtl" }}
         >
           <h6 style={{ margin: "6px" }}>ملخص الطلبية</h6>
           <hr className="m-0" />
@@ -330,23 +334,22 @@ const DeliveryMethod = () => {
             ستتمكن من إضافة قسيمة الشراء عند اختيار طريقة الدفع الخاصة بك.
           </p>
           <Button
+            onClick={() => navigate("/payment2",{state: { order,cart, paymentMethod }})}
             variant="contained"
-            disabled
             style={{
               width: "90%",
               margin: "5%",
               color: "white",
-              backgroundColor: "gray",
+              backgroundColor: "orange",
               padding: "4%",
             }}
           >
             تأكيد الطلبية
           </Button>
         </div>
-
       </div>
     </div>
   );
 };
 
-export default DeliveryMethod;
+export default PaymentForm;
