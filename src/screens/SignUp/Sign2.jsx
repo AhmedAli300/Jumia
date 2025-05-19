@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../Login/Login.css';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword } from '../../store/Slice/authSlice';
+import { saveStepData } from '../../store/Slice/authSlice';
 
 const Sign2 = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const emailValue = useSelector(state => state.auth.email);
+
+    // const emailValue = useSelector(state => state.auth.signupData.email);
 
     const {
         register,
@@ -20,27 +21,18 @@ const Sign2 = () => {
     const firstNameValue = watch('firstName');
     const lastNameValue = watch('lastName');
     const phoneValue = watch('phone');
-
     const onSubmit = async (data) => {
         const sendData = {
-            email: emailValue,
-            password: data.Password,
-            passwordConfirm: data.ConfirmPassword,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            phone: data.phone,
-        };
 
-        try {
-            const res = await dispatch(resetPassword(sendData)).unwrap();
-            if (res.token) {
-                localStorage.setItem('token', res.token);
-            }
-            navigate('/');
-        } catch (err) {
-            console.error("Reset password failed:", err);
-            alert(err);
-        }
+            name: data.firstName + " " + data.lastName,
+            mobilePhone: data.phone,
+            // email: emailValue,
+        };
+        console.log("data2", sendData)
+
+        dispatch(saveStepData(sendData));
+
+        navigate('/sign3');
     };
 
     return (
@@ -56,7 +48,7 @@ const Sign2 = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         type="text"
-                        className="my-3 fontText coloremail w-100 border-0 text-dark"
+                        className="mt-4 py-4 fontText w-100  text-dark p-3 posheghit "
                         placeholder="الاسم الاول*"
                         {...register('firstName', {
                             required: 'الرجاء كتابة اسمك الأول كما في الهوية الوطنية الخاصة بك',
@@ -66,23 +58,21 @@ const Sign2 = () => {
                             }
                         })}
                     />
-                    {errors.firstName && <small className="text-danger">{errors.firstName.message}</small>}
-                    <div className="text-muted">الاسم الحالي: {firstNameValue}</div>
+                    {errors.firstName && <small className="text-danger flex-start">{errors.firstName.message}</small>}
 
                     <input
                         type="text"
-                        className="my-3 fontText coloremail w-100 border-0 text-dark"
+                        className="mt-4 py-4 fontText w-100  text-dark p-3 posheghit "
                         placeholder="الكنية*"
                         {...register('lastName', {
                             required: 'يرجى كتابة اسم عائلتك كما هو الحال في هويتك الوطنية',
                         })}
                     />
-                    {errors.lastName && <small className="text-danger">{errors.lastName.message}</small>}
-                    <div className="text-muted">الكنية الحالية: {lastNameValue}</div>
+                    {errors.lastName && <small className="text-danger flex-start">{errors.lastName.message}</small>}
 
                     <input
                         type="text"
-                        className="my-3 fontText coloremail w-100 border-0 text-dark"
+                        className="mt-4 py-4 fontText w-100  text-dark p-3 posheghit "
                         placeholder="رقم الهاتف*"
                         {...register('phone', {
                             required: 'اكتب رقم هاتف صالح للمتابعة',
@@ -92,10 +82,9 @@ const Sign2 = () => {
                             }
                         })}
                     />
-                    {errors.phone && <small className="text-danger">{errors.phone.message}</small>}
-                    <div className="text-muted">رقم الهاتف الحالي: {phoneValue}</div>
+                    {errors.phone && <small className="text-danger flex-start">{errors.phone.message}</small>}
 
-                    <button type="submit" className="fontText btnn w-100 mt-4">
+                    <button type="submit" className="fontText btnn w-100 mt-5">
                         استمر
                     </button>
                 </form>

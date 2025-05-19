@@ -12,6 +12,7 @@ import EmptyCart from "../screens/Cart/emptyCart";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductDetails from "../Comoonents/Product details/ProductDetails";
 
+
 import Login2 from "../screens/Login/Login2";
 import Login3 from "../screens/Login/Login3";
 import Login4 from "../screens/Login/Login4";
@@ -27,6 +28,7 @@ import PaymentForm from "../screens/Order/PaymentMethod/PaymentMethod";
 import ConfirmOrder from "../screens/Order/ConfirmOrder/ConfirmOrder";
 import Confirm from "../screens/Order/Confirm/Confirm";
 import Payment from "../screens/Order/Payment/Payment";
+
 // import Products from '../screens/Products/Product';
 
 const router = createBrowserRouter([
@@ -131,12 +133,27 @@ const router = createBrowserRouter([
     element: <Login6 />,
   },
   {
+
     path: "signup",
     element: <SignUp />,
   },
   {
     path: "sign2",
     element: <Sign2 />,
+
+  },
+  {
+    path: 'sign3',
+    element: <Sign3 />
+  },
+  {
+    path: 'sign4',
+    element: <Sign4 />
+  },
+  {
+   path:'user',
+   element:<UserSetting/>
+
   },
 
   {

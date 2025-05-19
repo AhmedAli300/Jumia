@@ -3,17 +3,21 @@ import './login.css';
 import { useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/Slice/authSlice'; 
+import { useDispatch} from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
+import { login } from '../../store/Slice/authSlice';
 
 const Login2 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const emailValue = useSelector(state => state.auth.email);
+  // const emailValue = useSelector(state => state.auth.email);
+  // const emailValue = localStorage.getItem('userEmail');
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(prev => !prev);
-
+const location = useLocation();
+const emailValue = location.state?.email || '';
   useEffect(() => {
     if (!emailValue) {
       navigate('/login');
@@ -22,20 +26,20 @@ const Login2 = () => {
 
   const onSubmit = (data) => {
     const sendData = {
-      email: emailValue, 
-      password: data.Password 
+      email: emailValue,
+      password: data.Password
     };
     console.log("DATA TO SEND:", sendData);
-      dispatch(login(sendData)) .unwrap() .then((response) => {
-      console.log("Response from server:", response); 
-      navigate('/'); 
+    dispatch(login(sendData)).unwrap().then((response) => {
+      console.log("Response from server:", response);
+      navigate('/');
     })
-    .catch((error) => {
-      console.log("Login error:", error); 
-      alert(error || 'فشل في تسجيل الدخول');
-    });
+      .catch((error) => {
+        console.log("Login error:", error);
+        alert(error || 'فشل في تسجيل الدخول');
+      });
   };
-  
+
   return (
     <div className="login-container">
       <div className="log-box">
@@ -53,7 +57,7 @@ const Login2 = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} >
           <div className="mb-3 position-relative">
-            <input type="email"  className="form-control  fontText coloremail" placeholder="عنوان البريد الإلكتروني أو رقم الهاتف*"
+            <input type="email" className="form-control  fontText coloremail" placeholder="عنوان البريد الإلكتروني أو رقم الهاتف*"
               value={emailValue}
               readOnly
             />
@@ -93,7 +97,7 @@ const Login2 = () => {
         </form>
 
         <p className="mt-3 fontText" style={{ color: "#f8982d" }}
-        onClick={() => navigate('/login3')}> هل نسيت كلمة السر؟  </p>
+          onClick={() => navigate('/login3',{ state: { email: emailValue } })}> هل نسيت كلمة السر؟  </p>
       </div>
 
       <div className="foo0ter mt-5 fontText" style={{ fontSize: '14px', fontWeight: 700 }}>

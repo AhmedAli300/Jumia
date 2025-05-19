@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword } from '../../store/Slice/authSlice';
+import { saveStepData } from '../../store/Slice/authSlice';
 
 const SignUp = () => {
     const dispatch = useDispatch();
@@ -23,24 +23,17 @@ const SignUp = () => {
     //     }
     // }, [emailValue, navigate]);
 
+
     const onSubmit = async (data) => {
         const sendData = {
             email: emailValue,
             password: data.Password,
             passwordConfirm: data.ConfirmPassword
         };
+        console.log("data1", sendData)
 
-        try {
-            const res = await dispatch(resetPassword(sendData)).unwrap();
-
-            if (res.token) {
-                localStorage.setItem('token', res.token);
-            }
-            navigate('/');
-        } catch (err) {
-            console.error("Reset password failed:", err);
-            alert(err);
-        }
+        dispatch(saveStepData(sendData));
+        navigate('/sign2');
     };
 
 

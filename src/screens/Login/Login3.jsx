@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './login.css';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgotPassword } from '../../store/Slice/authSlice';
 
@@ -9,7 +9,10 @@ const Login3 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { handleSubmit } = useForm();
-  const emailValue = useSelector(state => state.auth.email);
+  // const emailValue = useSelector(state => state.auth.email);
+  // const emailValue = localStorage.getItem('userEmail');
+const location = useLocation();
+const emailValue = location.state?.email || '';
 
   useEffect(() => {
     if (!emailValue) {
@@ -28,7 +31,7 @@ const Login3 = () => {
 
 
       // if (responseMessage == "The password reset code has been sent to your email successfully") {
-      navigate('/login4');
+      navigate('/login4',{ state: { email: emailValue } });
       // } 
     } catch (error) {
       console.error("Error in forgotPassword:", error);
