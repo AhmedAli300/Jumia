@@ -82,15 +82,16 @@ body{
     font-family: 'Segoe UI', Arial, sans-serif;
     background: white;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, .075);
-    /* border: 1px solid #dee2e6; */
+    border: 1px solid #dee2e6;
     padding: 1.5rem;
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
   }
   
   .subcategory-item {
     text-decoration: none;
+    /* border: 1px solid #dee2e6; */
     color: #555;
     padding: 2px;
   }
