@@ -53,15 +53,6 @@ export const confirmVerificationCode = (emailVerificationCode, email) => async (
   }
 };
 
-// export const signUp = createAsyncThunk('auth/signUp', async (userData, thunkAPI) => {
-//   try {
-//     const response = await axios.post('http://127.0.0.1:3000/api/v1/users/signup', userData);
-//     console.log("signUp data",response.data)
-//     return response.data;
-//   } catch (err) {
-//     return thunkAPI.rejectWithValue(err.response.data.message || 'Signup failed');
-//   }
-// });
 export const signUp = createAsyncThunk('auth/signUp', async (userData, thunkAPI) => {
   try {
     const response = await axios.post('http://127.0.0.1:3000/api/v1/users/signup', userData);
@@ -185,6 +176,51 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+export const deleteAccount = createAsyncThunk(
+  'user/deleteAccount',
+  async (_, thunkAPI) => {
+    try {
+      const token =localStorage.getItem('token');;
+      console.log("Token deket",token)
+      await axios.delete('http://127.0.0.1:3000/api/v1/users/', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      localStorage.removeItem('user');
+      return true;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message || 'Failed to delete account');
+    }
+  }
+);
+
+export const updateUserData = async (userData, token) => {
+  const res = await axios.patch(
+    'http://127.0.0.1:3000/api/v1/users/updateUserData',
+    userData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return res.data;
+};
+
+export const updateUserMobilePhone = async (mobilePhone, token) => {
+  const res = await axios.patch(
+    'http://127.0.0.1:3000/api/v1/users/updateUserMobilePhone',
+    { mobilePhone },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return res.data;
+};
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -275,9 +311,6 @@ const authSlice = createSlice({
         state.error = action.payload;
         state.verifyEmailSuccess = false;
       })
-
-
-
 
        .addCase(signUp.pending, (state) => {
         state.loading = true;
@@ -404,8 +437,22 @@ const authSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.error = action.payload;
+      })
+            .addCase(deleteAccount.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteAccount.fulfilled, (state) => {
+        state.loading = false;
+        state.user = null;
+      })
+      .addCase(deleteAccount.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
+  
   },
+  
 });
 
 export const { setEmail, setToken, logout, clearMessages ,resetVerifyEmailState,saveStepData, clearSignupData } = authSlice.actions;
