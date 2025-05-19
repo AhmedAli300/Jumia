@@ -28,7 +28,9 @@ import PaymentForm from "../screens/Order/PaymentMethod/PaymentMethod";
 import ConfirmOrder from "../screens/Order/ConfirmOrder/ConfirmOrder";
 import Confirm from "../screens/Order/Confirm/Confirm";
 import Payment from "../screens/Order/Payment/Payment";
-
+import Sign3 from "../screens/SignUp/Sign3";
+import Sign4 from "../screens/SignUp/Sign4";
+import UserSetting from "../screens/UserSetting/UserSetting";
 // import Products from '../screens/Products/Product';
 
 const router = createBrowserRouter([
