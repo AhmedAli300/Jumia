@@ -31,7 +31,7 @@ const Home = () => {
               <div className="category-menu">
                 {categories?.map((category) => (
                   <div
-                    key={category.id}
+                    key={category._id}
                     className="category-item"
                     onMouseEnter={() => setActiveCategory(category)}
                   >

@@ -71,9 +71,9 @@ const CartItem = () => {
 
                         <div className="border-bottom" />
 
-                        {cart.items.map((item) => {
-                            const isLoading = loadingItemId === item.product._id;
-                            const maxReached = item.quantity >= item.product.stock;
+                        {cart?.items.map((item) => {
+                            const isLoading = loadingItemId === item.product?._id;
+                            const maxReached = item.quantity >= item.product?.stock;
                             const minReached = item.quantity <= 1;
 
                             return (

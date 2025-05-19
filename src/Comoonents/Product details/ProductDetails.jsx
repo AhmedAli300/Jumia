@@ -126,7 +126,7 @@ const ProductDetails = () => {
                 </p>
                 <hr />
                 <p>
-                  <del>25.00 جنيه</del>
+                  <del>2000.00 جنيه</del>
                   <span className="bg-warning me-2 p-1">%20-</span>
                   <span className="fw-bolder">{product?.product?.price}</span>
                 </p>
@@ -275,7 +275,7 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <div className="bg-body-tertiary rounded mt-3" id="des1">
+          {/* <div className="bg-body-tertiary rounded mt-3" id="des1">
             <div className="d-flex justify-content-between">
               <h6 className="h5 pt-3 pe-3 fw-bolder">مواصفات المنتج</h6>
               <p className="pe-2">
@@ -309,7 +309,7 @@ const ProductDetails = () => {
                 التأثير وسريع الإمتصاص .
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="details-container bg-body-tertiary rounded mt-3" id="des2">
             <h3 className="p-2 ">المواصفات</h3>
@@ -505,7 +505,7 @@ const ProductDetails = () => {
               width="150"
             />
             <p>
-              توصيل سريع في المدن الرئيسية{" "}
+              توصيل سريع في المدن الرئيسية
               <a href="#" className="link-underline link-underline-opacity-0">
                 التفاصيل
               </a>
@@ -522,13 +522,13 @@ const ProductDetails = () => {
               <option >6 اكتوبر </option>
               <option >الشرقيه</option>
               <option >المنصوره</option>
-              <option >الجيزه</option>
-              <option >الجيزه</option>
-              <option >الجيزه</option>
-              <option >الجيزه</option>
-              <option >الجيزه</option>
-              <option >الجيزه</option>
-              <option >الجيزه</option>
+              <option >دمياط </option>
+              <option >بنى سويف</option>
+              <option >كفر الشيخ</option>
+              <option >بور سعيد</option>
+              <option >سوهاج</option>
+              <option >الشرقيه</option>
+              <option >الاسكندريه</option>
               
             </select>
 
@@ -538,14 +538,24 @@ const ProductDetails = () => {
               dir="ltr"
             >
               <option hidden>6 اكتوبر</option>
-              {/* باقي الاختيارات هنا */}
+              <option >القاهرة</option>
+              <option >الجيزه</option>
+              <option >الشرقيه</option>
+              <option >المنصوره</option>
+              <option >دمياط </option>
+              <option >بنى سويف</option>
+              <option >كفر الشيخ</option>
+              <option >بور سعيد</option>
+              <option >سوهاج</option>
+              <option >الشرقيه</option>
+              <option >الاسكندريه</option>
             </select>
 
             <div className="mt-2 d-flex justify-content-between">
               <div className="d-flex gap-2">
                 <img
-                  src="./images/Screenshot 2025-01-27 173404.png"
-                  alt=""
+                  src="/Screenshot 2025-01-27 173404.png"
+                  alt="محطة الاستلام"
                   height="50"
                   width="50"
                 />
@@ -563,8 +573,8 @@ const ProductDetails = () => {
             <div className="mt-2 d-flex justify-content-between">
               <div className="d-flex gap-2">
                 <img
-                  src="./images/Screenshot 2025-01-27 180507.png"
-                  alt=""
+                  src="/Screenshot 2025-01-27 180507.png"
+                  alt="توصيل المنزل"
                   height="50"
                   width="50"
                 />
@@ -583,8 +593,8 @@ const ProductDetails = () => {
 
             <div className="mt-2 d-flex gap-2">
               <img
-                src="./images/Screenshot 2025-01-27 180949.png"
-                alt=""
+                src="/Screenshot 2025-01-27 180949.png"
+                alt="محطة الاستلام"
                 height="50"
                 width="50"
               />
@@ -596,8 +606,8 @@ const ProductDetails = () => {
 
             <div className="mt-2 d-flex gap-2">
               <img
-                src="./images/Screenshot 2025-01-27 181107.png"
-                alt=""
+                src="/Screenshot 2025-01-27 181107.png"
+                alt="الضمان"
                 height="50"
                 width="50"
               />
