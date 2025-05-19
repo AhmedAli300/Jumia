@@ -57,7 +57,7 @@ const Confirm = () => {
           <div className="card-element">
             <CardElement />
           </div>
-          <button className="bttn" type="submit" disabled={!stripe || loading}>
+          <button className="bttn" type="submit" disabled={!stripe || loading} onClick={()=>{navigator("/orderdone")}}>
             {loading ? "جارٍ المعالجة..." : "ادفع الآن"}
           </button>
           {message && (

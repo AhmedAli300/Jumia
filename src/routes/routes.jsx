@@ -31,6 +31,7 @@ import Payment from "../screens/Order/Payment/Payment";
 import Sign3 from "../screens/SignUp/Sign3";
 import Sign4 from "../screens/SignUp/Sign4";
 import UserSetting from "../screens/UserSetting/UserSetting";
+import OrderDone from "../screens/Order/OrderDone/OrderDone";
 // import Products from '../screens/Products/Product';
 
 
@@ -97,6 +98,11 @@ const router = createBrowserRouter([
       {
         path:'payment2',
         element:<Payment/>,
+        errorElement: <NotFound />,
+      },
+      {
+        path:'orderdone',
+        element:<OrderDone/>,
         errorElement: <NotFound />,
       }
 
