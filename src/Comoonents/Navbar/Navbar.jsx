@@ -81,7 +81,7 @@ const Navbar = () => {
           </div>
 
           <form className="d-flex search-bar mx-auto align-items-center" style={{ width: '100%', maxWidth: '550px' }}>
-            {/* <i className="bi bi-search search-icon ssicon"></i> */}
+            <i className="bi bi-search search-icon ssicon"></i>
             <input
               className="form-control px-5"
               type="search"
@@ -136,8 +136,8 @@ const Navbar = () => {
                         </a>
                       </li>
                       <li>
-                        <a className="dropdown-item">
-                          <i className="bi bi-person fs-5 mx-1"></i> الحساب
+                        <a className="dropdown-item" >
+                          <i className="bi bi-person fs-5 mx-1" ></i> الحساب 
                         </a>
                       </li>
                       <li>
@@ -154,7 +154,7 @@ const Navbar = () => {
                     </>
                   ) : (
                     <>
-                      <li>
+                      <li onClick={() => navigate('/user')}>
                         <a className="dropdown-item">
                           <i className="bi bi-person fs-5 mx-1"></i> الحساب
                         </a>
