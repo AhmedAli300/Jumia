@@ -4,6 +4,8 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearUserCart } from "../../../store/Slice/cartSlice";
 const Confirm = () => {
   const stripe = useStripe();
   const elements = useElements();
@@ -12,6 +14,7 @@ const Confirm = () => {
 
   const location = useLocation();
   const order = location.state?.order;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (order) {
@@ -81,6 +84,7 @@ const Confirm = () => {
             },
           }
         );
+        dispatch(clearUserCart());
 
         setMessage("✅ تم الدفع بنجاح");
         navigate("/orderdone");
@@ -91,7 +95,6 @@ const Confirm = () => {
       }
     } catch (err) {
       setMessage(`❌ خطأ: ${err.response?.data?.message || err.message}`);
-      
     }
 
     setLoading(false);
