@@ -28,13 +28,6 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [allProducts, setAllProducts] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/v1/products")
-      .then((res) => setAllProducts(res.data.data))
-      .catch((err) => console.log(err));
-  }, []);
-
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
@@ -59,6 +52,14 @@ const Navbar = () => {
 
     dispatch(setFilteredProducts(filtered));
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/v1/products")
+      .then((res) => setAllProducts(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+
   return (
     <div>
       <div className="container-fluid main">
