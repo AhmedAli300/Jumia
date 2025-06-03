@@ -2,8 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./OrderDone.css";
 import { MdOutlineDone } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 const OrderDone = () => {
   const navig = useNavigate();
+    const location = useLocation();
+    const order = location.state?.order;
   return (
     <div className="order d-flex justify-content-center align-items-center">
       <div
@@ -29,7 +32,7 @@ const OrderDone = () => {
           <p className="fs-2">شكرًا لطلبك من جوميا</p>
           <p>
             <strong>رقم الطلب</strong>
-            <span className="text-success"> 123456789</span>
+            <span className="text-success"> {order.orderNumber}</span>
           </p>
         </div>
         <button
