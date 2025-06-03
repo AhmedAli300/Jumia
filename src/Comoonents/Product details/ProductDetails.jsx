@@ -46,6 +46,9 @@ const ProductDetails = () => {
         <section className="col-12 col-sm-7 mt-5 ms-3">
           <div className="bg-body-tertiary rounded">
             <div className="row d-flex p-3">
+              {console.log(product.product?.images[0]?.secure_url)}
+              {console.log(product.product)}
+
               <div className="col-sm-12 col-md-4">
                 <img
                   src={product.product?.images[0]?.secure_url}
@@ -122,7 +125,7 @@ const ProductDetails = () => {
                 </p>
                 <hr />
                 <p>
-                  {/* <del>25.00 جنيه</del> */}
+                  <del>25.00 جنيه</del>
                   <span className="bg-warning me-2 p-1">%20-</span>
                   <span className="fw-bolder">{product?.product?.price}</span>
                 </p>
@@ -529,8 +532,8 @@ const ProductDetails = () => {
             <div className="mt-2 d-flex justify-content-between">
               <div className="d-flex gap-2">
                 <img
-                  src="./images/Screenshot 2025-01-27 173404.png"
-                  alt=""
+                  src="/Screenshot 2025-01-27 173404.png"
+                  alt="محطة الاستلام"
                   height="50"
                   width="50"
                 />
@@ -548,7 +551,7 @@ const ProductDetails = () => {
             <div className="mt-2 d-flex justify-content-between">
               <div className="d-flex gap-2">
                 <img
-                  src="./images/Screenshot 2025-01-27 180507.png"
+                  src="/Screenshot 2025-01-27 180507.png"
                   alt=""
                   height="50"
                   width="50"
@@ -568,7 +571,7 @@ const ProductDetails = () => {
 
             <div className="mt-2 d-flex gap-2">
               <img
-                src="./images/Screenshot 2025-01-27 180949.png"
+                src="/Screenshot 2025-01-27 180949.png"
                 alt=""
                 height="50"
                 width="50"
@@ -581,7 +584,7 @@ const ProductDetails = () => {
 
             <div className="mt-2 d-flex gap-2">
               <img
-                src="./images/Screenshot 2025-01-27 181107.png"
+                src="/Screenshot 2025-01-27 181107.png"
                 alt=""
                 height="50"
                 width="50"
@@ -614,7 +617,7 @@ const ProductDetails = () => {
             <hr />
             <h6>
               أداء البائع{" "}
-              <img src="./images/Screenshot 2025-01-28 161248.png" alt="" />
+              <img src="/Screenshot 2025-01-28 161248.png" alt="" />
             </h6>
             <ul type="none">
               <li>
