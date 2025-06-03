@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/Slice/authSlice'
+import { setFilteredProducts, clearFilteredProducts } from '../../store/Slice/filterSlice';
+import axios from "axios";
+
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
 
@@ -19,6 +22,43 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartSize = useSelector((state) => state.cart.size);
+
+
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/v1/products")
+      .then((res) => setAllProducts(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (value.trim() === "") {
+      dispatch(clearFilteredProducts());
+      return;
+    }
+
+    const isNumber = !isNaN(value);
+
+    let filtered;
+
+    if (isNumber) {
+      const priceNum = Number(value);
+      filtered = allProducts.filter((product) => Number(product.price) === priceNum);
+    } else {
+      filtered = allProducts.filter((product) =>
+        product.name.toLowerCase().includes(value.toLowerCase())
+      );
+    }
+
+    dispatch(setFilteredProducts(filtered));
+  };
   return (
     <div>
       <div className="container-fluid main">
@@ -88,7 +128,11 @@ const Navbar = () => {
               placeholder="البحث عن منتجات، العلامات التجارية والأقسام"
               aria-label="Search"
               style={{ border: '1px solid #ccc', padding: '10px 15px' }}
+              value={searchTerm}
+              onChange={handleSearch}
+
             />
+
             <button
               className="btn btn-search ms-2 changecolor"
               type="submit"
@@ -137,7 +181,7 @@ const Navbar = () => {
                       </li>
                       <li>
                         <a className="dropdown-item" >
-                          <i className="bi bi-person fs-5 mx-1" ></i> الحساب 
+                          <i className="bi bi-person fs-5 mx-1" ></i> الحساب
                         </a>
                       </li>
                       <li>
