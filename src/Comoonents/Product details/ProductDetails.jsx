@@ -46,9 +46,6 @@ const ProductDetails = () => {
         <section className="col-12 col-sm-7 mt-5 ms-3">
           <div className="bg-body-tertiary rounded">
             <div className="row d-flex p-3">
-              {console.log(product.product?.images[0]?.secure_url)}
-              {console.log(product.product)}
-
               <div className="col-sm-12 col-md-4">
                 <img
                   src={product.product?.images[0]?.secure_url}
@@ -125,7 +122,7 @@ const ProductDetails = () => {
                 </p>
                 <hr />
                 <p>
-                  <del>25.00 جنيه</del>
+                  {/* <del>25.00 جنيه</del> */}
                   <span className="bg-warning me-2 p-1">%20-</span>
                   <span className="fw-bolder">{product?.product?.price}</span>
                 </p>
