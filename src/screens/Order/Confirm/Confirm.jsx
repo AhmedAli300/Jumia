@@ -87,7 +87,7 @@ const Confirm = () => {
         dispatch(clearUserCart());
 
         setMessage("✅ تم الدفع بنجاح");
-        navigate("/orderdone");
+        navigate("/orderdone", { state: { order } });
       } else {
         setMessage(
           `❌ فشل الدفع: ${confirmRes.paymentIntent?.status || "unknown"}`
@@ -139,8 +139,6 @@ const Confirm = () => {
           </div>
         )}
       </form>
-
-      {order && <p className="order-info">رقم الطلب: {order._id}</p>}
     </div>
   );
 };
