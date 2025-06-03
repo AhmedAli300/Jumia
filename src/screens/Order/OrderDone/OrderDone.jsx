@@ -67,7 +67,11 @@ const OrderDone = () => {
         >
           العودة للصفحة الرئيسية
         </button>
-        <button onClick={handleClick} disabled={loading}>
+        <button
+          className="btn btn-success mt-3"
+          onClick={handleClick}
+          disabled={loading}
+        >
           {loading ? "جاري التحميل..." : "عرض طلباتي"}
         </button>
       </div>
