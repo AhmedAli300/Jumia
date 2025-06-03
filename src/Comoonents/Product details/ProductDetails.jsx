@@ -178,7 +178,7 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <div className="col-md-6 col-lg-12 mt-3">
+          {/* <div className="col-md-6 col-lg-12 mt-3">
             <div className="bg-body-tertiary rounded">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="h5 m-2">المنتجات المدعومة</h3>
@@ -272,9 +272,9 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-body-tertiary rounded mt-3" id="des1">
+          {/* <div className="bg-body-tertiary rounded mt-3" id="des1">
             <div className="d-flex justify-content-between">
               <h6 className="h5 pt-3 pe-3 fw-bolder">مواصفات المنتج</h6>
               <p className="pe-2">
@@ -308,7 +308,7 @@ const ProductDetails = () => {
                 التأثير وسريع الإمتصاص .
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="details-container bg-body-tertiary rounded mt-3" id="des2">
             <h3 className="p-2 ">المواصفات</h3>
