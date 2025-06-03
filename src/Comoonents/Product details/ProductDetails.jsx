@@ -125,7 +125,7 @@ const ProductDetails = () => {
                 </p>
                 <hr />
                 <p>
-                  <del>25.00 جنيه</del>
+                  {/* <del>25.00 جنيه</del> */}
                   <span className="bg-warning me-2 p-1">%20-</span>
                   <span className="fw-bolder">{product?.product?.price}</span>
                 </p>
