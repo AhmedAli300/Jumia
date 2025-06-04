@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from '../../store/Slice/authSlice';
-
+import Chat from '../Chat/Chat';
 const Layout = () => {
   const dispatch = useDispatch();
   const [isChatOpen, setIsChatOpen] = useState(false);
