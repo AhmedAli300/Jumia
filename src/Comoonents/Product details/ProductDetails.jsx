@@ -125,7 +125,7 @@ const ProductDetails = () => {
                 </p>
                 <hr />
                 <p>
-                  <del>25.00 جنيه</del>
+                  {/* <del>25.00 جنيه</del> */}
                   <span className="bg-warning me-2 p-1">%20-</span>
                   <span className="fw-bolder">{product?.product?.price}</span>
                 </p>
@@ -178,7 +178,7 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <div className="col-md-6 col-lg-12 mt-3">
+          {/* <div className="col-md-6 col-lg-12 mt-3">
             <div className="bg-body-tertiary rounded">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="h5 m-2">المنتجات المدعومة</h3>
@@ -272,9 +272,9 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-body-tertiary rounded mt-3" id="des1">
+          {/* <div className="bg-body-tertiary rounded mt-3" id="des1">
             <div className="d-flex justify-content-between">
               <h6 className="h5 pt-3 pe-3 fw-bolder">مواصفات المنتج</h6>
               <p className="pe-2">
@@ -308,7 +308,7 @@ const ProductDetails = () => {
                 التأثير وسريع الإمتصاص .
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="details-container bg-body-tertiary rounded mt-3" id="des2">
             <h3 className="p-2 ">المواصفات</h3>
@@ -532,8 +532,8 @@ const ProductDetails = () => {
             <div className="mt-2 d-flex justify-content-between">
               <div className="d-flex gap-2">
                 <img
-                  src="./images/Screenshot 2025-01-27 173404.png"
-                  alt=""
+                  src="/Screenshot 2025-01-27 173404.png"
+                  alt="محطة الاستلام"
                   height="50"
                   width="50"
                 />
@@ -551,7 +551,7 @@ const ProductDetails = () => {
             <div className="mt-2 d-flex justify-content-between">
               <div className="d-flex gap-2">
                 <img
-                  src="./images/Screenshot 2025-01-27 180507.png"
+                  src="/Screenshot 2025-01-27 180507.png"
                   alt=""
                   height="50"
                   width="50"
@@ -571,7 +571,7 @@ const ProductDetails = () => {
 
             <div className="mt-2 d-flex gap-2">
               <img
-                src="./images/Screenshot 2025-01-27 180949.png"
+                src="/Screenshot 2025-01-27 180949.png"
                 alt=""
                 height="50"
                 width="50"
@@ -584,7 +584,7 @@ const ProductDetails = () => {
 
             <div className="mt-2 d-flex gap-2">
               <img
-                src="./images/Screenshot 2025-01-27 181107.png"
+                src="/Screenshot 2025-01-27 181107.png"
                 alt=""
                 height="50"
                 width="50"
@@ -617,7 +617,7 @@ const ProductDetails = () => {
             <hr />
             <h6>
               أداء البائع{" "}
-              <img src="./images/Screenshot 2025-01-28 161248.png" alt="" />
+              <img src="/Screenshot 2025-01-28 161248.png" alt="" />
             </h6>
             <ul type="none">
               <li>
