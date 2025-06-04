@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/Slice/authSlice'
-import { setFilteredProducts, clearFilteredProducts } from '../../store/Slice/filterSlice';
-import axios from "axios";
-const Navbar = () => {
+
+const Navbar = ({onChatToggle }) => {
+
+
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -349,10 +350,11 @@ const Navbar = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <button className="chat-button">
-                      <i className="bi bi-chat-left-dots-fill mx-2"></i> تحدث
-                      معنا
-                    </button>
+
+               <button className="btn chat-button" onClick={onChatToggle }>
+        <i className="bi bi-chat-left-dots-fill mx-2"></i> تحدث معنا
+      </button>
+
                   </li>
                 </ul>
               </div>
