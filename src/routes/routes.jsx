@@ -18,9 +18,14 @@ import Login3 from "../screens/Login/Login3";
 import Login4 from "../screens/Login/Login4";
 import Login5 from "../screens/Login/Login5";
 import Login6 from "../screens/Login/Login6";
+
+import SignUp from '../screens/SignUp/SignUp';
+import Sign2 from '../screens/SignUp/Sign2';
+import Sign1 from '../screens/SignUp/Sign1'
+import Sign3 from '../screens/SignUp/Sign3';
+import Sign4 from '../screens/SignUp/Sign4'
+
 import Products from "../screens/Products/Product";
-import SignUp from "../screens/SignUp/SignUp";
-import Sign2 from "../screens/SignUp/Sign2";
 import SelectDeliveryAddress from "../screens/Order/SelectDeliveryAddress/SelectDeliveryAddress";
 import DelivertMethod from "../screens/Order/DelivertMethod/DelivertMethod";
 import { PaymentElement } from "@stripe/react-stripe-js";
@@ -28,12 +33,11 @@ import PaymentForm from "../screens/Order/PaymentMethod/PaymentMethod";
 import ConfirmOrder from "../screens/Order/ConfirmOrder/ConfirmOrder";
 import Confirm from "../screens/Order/Confirm/Confirm";
 import Payment from "../screens/Order/Payment/Payment";
-import Sign3 from "../screens/SignUp/Sign3";
-import Sign4 from "../screens/SignUp/Sign4";
+
 import UserSetting from "../screens/UserSetting/UserSetting";
 import OrderDone from "../screens/Order/OrderDone/OrderDone";
 import Form from '../screens/userSetting/FormSetting'
-import  Acount from '../screens/userSetting/acount'
+import Acount from '../screens/userSetting/acount'
 import MyOrders from "../screens/userSetting/MyOrders";
 // import Products from '../screens/Products/Product';
 
@@ -95,22 +99,22 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
       },
       {
-        path:'confirmorder',
-        element:<Confirm/>
+        path: 'confirmorder',
+        element: <Confirm />
       },
       {
-        path:'payment2',
-        element:<Payment/>,
+        path: 'payment2',
+        element: <Payment />,
         errorElement: <NotFound />,
       },
       {
-        path:'orderdone',
-        element:<OrderDone/>,
+        path: 'orderdone',
+        element: <OrderDone />,
         errorElement: <NotFound />,
       },
       {
-        path:'myorders',
-        element:<MyOrders/>,
+        path: 'myorders',
+        element: <MyOrders />,
         errorElement: <NotFound />,
       }
 
@@ -151,14 +155,17 @@ const router = createBrowserRouter([
     element: <Login6 />,
   },
   {
-
-    path: "signup",
-    element: <SignUp />,
+    path: 'sign',
+    element: <SignUp />
   },
   {
-    path: "sign2",
-    element: <Sign2 />,
+    path: 'sign1',
+    element: <Sign1 />
 
+  },
+  {
+    path: 'sign2',
+    element: <Sign2 />
   },
   {
     path: 'sign3',
@@ -169,8 +176,8 @@ const router = createBrowserRouter([
     element: <Sign4 />
   },
   {
-   path:'user',
-   element:<UserSetting />
+    path: 'user',
+    element: <UserSetting />
   },
 
   {
@@ -178,12 +185,12 @@ const router = createBrowserRouter([
     element: <Wishlist />,
   },
   {
-    path:'form',
-    element:<Form/>
+    path: 'form',
+    element: <Form />
   },
   {
-    path:'acount',
-    element:<Acount/>
+    path: 'acount',
+    element: <Acount />
   },
   {
     path: "*",
