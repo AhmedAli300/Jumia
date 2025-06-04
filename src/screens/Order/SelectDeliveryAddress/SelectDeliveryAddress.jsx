@@ -124,6 +124,7 @@ const SelectDeliveryAddress = () => {
         product: item.product._id,
         quantity: item.quantity,
         price: item.product.price,
+        seller: item.product.seller,
       })),
       shippingAddress: {
         fullName,

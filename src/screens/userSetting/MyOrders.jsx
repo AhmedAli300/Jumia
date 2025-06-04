@@ -9,7 +9,7 @@ const MyOrders = () => {
 
   return (
     <div>
-      <h4>طلباتي</h4>
+      <h4 className="m-3">طلباتي</h4>
       {orders.map((order) => (
         <div key={order._id} className="border p-3 mb-3 rounded">
           <p>رقم الطلب: {order.orderNumber}</p>
