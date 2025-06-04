@@ -34,7 +34,11 @@ import UserSetting from "../screens/UserSetting/UserSetting";
 import OrderDone from "../screens/Order/OrderDone/OrderDone";
 import Form from '../screens/userSetting/FormSetting'
 import  Acount from '../screens/userSetting/acount'
+
 import Chat from "../Comoonents/Chat/Chat";
+
+import MyOrders from "../screens/userSetting/MyOrders";
+
 // import Products from '../screens/Products/Product';
 
 
@@ -106,6 +110,11 @@ const router = createBrowserRouter([
       {
         path:'orderdone',
         element:<OrderDone/>,
+        errorElement: <NotFound />,
+      },
+      {
+        path:'myorders',
+        element:<MyOrders/>,
         errorElement: <NotFound />,
       }
 
