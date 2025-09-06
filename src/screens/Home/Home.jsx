@@ -16,7 +16,7 @@ const Home = () => {
       .then((res) => setCategories(res.data.data.categories))
       .catch((err) => console.error(err));
   }, []);
-  console.log(categories);
+  // console.log(categories);
 
  
   return (
