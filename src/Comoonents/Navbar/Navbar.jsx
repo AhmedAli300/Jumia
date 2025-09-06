@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/Slice/authSlice'
+import { logout } from '../../store/Slice/authSlice';
+import { setFilteredProducts, clearFilteredProducts } from '../../store/Slice/filterSlice';
 
 import axios from "axios";
 
@@ -142,7 +143,7 @@ const Navbar = ({onChatToggle }) => {
             className="d-flex search-bar mx-auto align-items-center"
             style={{ width: "100%", maxWidth: "550px" }}
           >
-            <i className="bi bi-search search-icon ssicon"></i>
+            {/* <i className="bi bi-search search-icon ssicon"></i> */}
             <input
               className="form-control px-5"
               type="search"

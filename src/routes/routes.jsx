@@ -5,7 +5,7 @@ import Details from "../screens/Details/Details";
 import NotFound from "../screens/Not_Found/NotFound";
 import Wishlist from "../screens/Wishlist/Wishlist";
 import Login from "../screens/Login/Login";
-import Layout from "../comoonents/Layout/Layout";
+import Layout from './../Comoonents/Layout/Layout';
 import About from "../screens/About/About";
 import Cart from "../screens/Cart/CartItem";
 import EmptyCart from "../screens/Cart/emptyCart";
@@ -43,6 +43,7 @@ import Acount from '../screens/userSetting/acount'
 import MyOrders from "../screens/userSetting/MyOrders";
 
 // import Products from '../screens/Products/Product';
+// import Layout from './../Comoonents/Layout/Layout';
 
 
 

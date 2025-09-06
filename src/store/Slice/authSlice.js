@@ -362,7 +362,7 @@ const authSlice = createSlice({
         // state.email = action.payload.email || '';
         if (action.payload) {
           state.user = action.payload ;
-          console.log('User data from getUserData:', action.payload); // Log the user data
+          // console.log('User data from getUserData:', action.payload); // Log the user data
         } else {
           state.user = null;
         }
